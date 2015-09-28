@@ -31,7 +31,7 @@ CatalogFile = %filename%.cat
 ;CatalogFile.NTamd64 = %filename%_amd64.cat
 ;CatalogFile.NTarm = %filename%_arm.cat
 
-DriverVer=09/25/2015,6.1.0.1
+DriverVer=09/28/2015,6.4.0.0
 
 [Manufacturer]
 %Manufacturer% = OSVRMfg, NTx86, NTamd64, NTia64, NTarm
@@ -39,6 +39,21 @@ DriverVer=09/25/2015,6.1.0.1
 [DestinationDirs]
 DefaultDestDir=12
 ;FakeModemCopyFileSection=12
+
+; Not needed on Windows 10 - in-box CDC driver should work fine
+[OSVRMfg.NT.10]
+
+[OSVRMfg.NTx86.10]
+
+[OSVRMfg.NTia64.10]
+
+[OSVRMfg.NTamd64.10]
+
+[OSVRMfg.NTarm.10]
+
+; Windows 8.1 and below
+[OSVRMfg.NT]
+%OSVR_HMD_CDC%=OSVR_HMD_CDC, USB\VID_1532&PID_0B00&MI_00
 
 [OSVRMfg.NTx86]
 %OSVR_HMD_CDC%=OSVR_HMD_CDC, USB\VID_1532&PID_0B00&MI_00
@@ -57,23 +72,23 @@ DefaultDestDir=12
 ;
 ; As recommended at https://support.microsoft.com/en-us/kb/837637
 ; and https://msdn.microsoft.com/en-us/library/ff542605(v=vs.85).aspx
-[OSVR_HMD_CDC]
+[OSVR_HMD_CDC.NT]
 Include=mdmcpq.inf
 CopyFiles=FakeModemCopyFileSection
 
-[OSVR_HMD_CDC.Services]
+[OSVR_HMD_CDC.NT.Services]
 Include=mdmcpq.inf
-AddService=usbser, 0x00000000, LowerFilter_Service_Inst
+AddService=usbser, %ServiceFlags%, LowerFilter_Service_Inst
 
-[OSVR_HMD_CDC.HW]
+[OSVR_HMD_CDC.NT.HW]
 Include=mdmcpq.inf
 AddReg=LowerFilterAddReg
-
-[SourceDisksNames]
-
-[SourceDisksFiles]
 
 [Strings]
 Manufacturer = "Sensics"
 OSVR_HMD_CDC = "OSVR HMD Communication Device"
 FILENAME = "osvr_cdc"
+
+; non-localizable
+; set as the default function driver for this device
+ServiceFlags=0x00000002
