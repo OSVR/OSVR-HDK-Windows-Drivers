@@ -71,6 +71,8 @@ Section
   ; DIFx/DPInst configuration file
   File "HDK-CDC\dpinst.xml"
 
+  File /oname=$INSTDIR\osvr-installer.ico "${MUI_ICON}"
+
   ; Locally-vendored copies of dpinst from the WDK
   ; File /oname=$INSTDIR\dpinst32.exe redist\wdk10\x86\dpinst.exe
   ; File /oname=$INSTDIR\dpinst64.exe redist\wdk10\x64\dpinst.exe
