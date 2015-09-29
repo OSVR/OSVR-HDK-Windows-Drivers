@@ -62,6 +62,7 @@ Section
     ExecWait '"$PLUGINSDIR\dpinst32.exe" ${DPINST_ARGS} $DPINST_ARGS_RUNTIME /PATH "$PLUGINSDIR"' $DUMMY ; dummy var to capture exit code
   ${EndIf}
 
+  RMDir /r $PLUGINSDIR
   SetErrorLevel 0
   ;SetOutPath $TEMP
   ;RMDir /r $INSTDIR
