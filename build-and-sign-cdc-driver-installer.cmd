@@ -5,6 +5,8 @@
 @set NSIS_DIR=%ProgramFiles(x86)%\NSIS
 
 pushd "%~dp0"
+del OSVR-HMD-CDC-Driver.exe >nul
+
 "%NSIS_DIR%\makensis" /DWDK_DIR="%WDK_DIR%" cdc-driver-installer.nsi
 
 "%WDK_DIR%\bin\x86\Signtool" sign /v /n %CERTNAME% /t http://timestamp.verisign.com/scripts/timstamp.dll OSVR-HMD-CDC-Driver.exe
