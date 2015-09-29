@@ -16,7 +16,8 @@ ShowInstDetails show
 
 ; MUI Settings
 !define MUI_ABORTWARNING
-!define MUI_ICON "${NSISDIR}\Contrib\Graphics\Icons\modern-install.ico"
+;!define MUI_ICON "${NSISDIR}\Contrib\Graphics\Icons\modern-install.ico"
+!define MUI_ICON "installer-icon\installer.ico"
 
 ; Welcome page
 !insertmacro MUI_PAGE_WELCOME
