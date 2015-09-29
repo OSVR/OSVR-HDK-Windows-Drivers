@@ -26,9 +26,12 @@ SetCompressor lzma
 
 Name "${PRODUCT_NAME} ${PRODUCT_VERSION}"
 OutFile "OSVR-HMD-CDC-Driver.exe"
-InstallDir "$PROGRAMFILES\${PRODUCT_PUBLISHER}\${PRODUCT_NAME}"
+InstallDir "$TEMP\${PRODUCT_PUBLISHER} ${PRODUCT_NAME}"
 ShowInstDetails show
 
+
+;!define DPINST_ARGS /C /SW
+!define DPINST_ARGS
 
 ; MUI 1.67 compatible ------
 !include "MUI.nsh"
@@ -39,13 +42,13 @@ ShowInstDetails show
 !define MUI_ICON "installer-icon\installer.ico"
 
 ; Welcome page
-!insertmacro MUI_PAGE_WELCOME
+;!insertmacro MUI_PAGE_WELCOME
 ; Components page
 ;!insertmacro MUI_PAGE_COMPONENTS
 ; Instfiles page
 !insertmacro MUI_PAGE_INSTFILES
 ; Finish page
-!insertmacro MUI_PAGE_FINISH
+;!insertmacro MUI_PAGE_FINISH
 
 ; Language files
 !insertmacro MUI_LANGUAGE "English"
@@ -78,17 +81,18 @@ Section
   ; File /oname=$INSTDIR\dpinst64.exe redist\wdk10\x64\dpinst.exe
 
   ; Directly-sourced versions of dpinst from the WDK, specified as a command-line define.
-  File /oname=$INSTDIR\dpinst32.exe "${WDK_DIR}\Redist\DIFx\dpinst\EngMui\x86\dpinst.exe"
-  File /oname=$INSTDIR\dpinst64.exe "${WDK_DIR}\Redist\DIFx\dpinst\EngMui\x64\dpinst.exe"
+  File /oname=$INSTDIR\dpinst32.exe "${WDK_DIR}\Redist\DIFx\dpinst\MultiLin\x86\dpinst.exe"
+  File /oname=$INSTDIR\dpinst64.exe "${WDK_DIR}\Redist\DIFx\dpinst\MultiLin\x64\dpinst.exe"
 
   ${If} ${RunningX64}
-    ExecWait '"$INSTDIR\dpinst64.exe" /c /sw /PATH "$INSTDIR"'
+    ExecWait '"$INSTDIR\dpinst64.exe" ${DPINST_ARGS} /PATH "$INSTDIR"'
   ${Else}
-    ExecWait '"$INSTDIR\dpinst32.exe" /c /sw /PATH "$INSTDIR"'
+    ExecWait '"$INSTDIR\dpinst32.exe" ${DPINST_ARGS} /PATH "$INSTDIR"'
   ${EndIf}
 
-  ; Remove these helpers that were just for the installer's sake.
-  Delete $INSTDIR\dpinst32.exe
-  Delete $INSTDIR\dpinst64.exe
-  Delete $INSTDIR\dpinst.xml ; TODO should we leave this behind?
+  ;Delete $INSTDIR\dpinst32.exe
+  ;Delete $INSTDIR\dpinst64.exe
+  ;Delete $INSTDIR\dpinst.xml
+  SetOutPath $TEMP
+  RMDir /r $INSTDIR
 SectionEnd
