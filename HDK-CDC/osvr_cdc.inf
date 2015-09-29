@@ -26,21 +26,25 @@ ClassGuid   = {4D36E978-E325-11CE-BFC1-08002BE10318}
 Provider    = %Manufacturer%
 CatalogFile = %filename%.cat
 
+; Files do not differ between arches (using an in-box driver)
+; so only a single cat is needed.
 ;CatalogFile.NTx86 = %filename%_x86.cat
 ;CatalogFile.NTia64 = %filename%_ia64.cat
 ;CatalogFile.NTamd64 = %filename%_amd64.cat
 ;CatalogFile.NTarm = %filename%_arm.cat
 
-DriverVer=09/28/2015,6.4.0.0
+DriverVer=09/29/2015,6.4.1.0
 
 [Manufacturer]
 %Manufacturer% = OSVRMfg, NTx86, NTamd64, NTia64, NTarm
 
 [DestinationDirs]
 DefaultDestDir=12
-;FakeModemCopyFileSection=12
 
-; Not needed on Windows 10 - in-box CDC driver should work fine
+;;;;;;;;;;;;;;;;;;;
+; "Models" sections
+
+; This driver not needed on Windows 10 - in-box CDC driver/inf (usbser.inf) should work fine
 [OSVRMfg.NT.10]
 
 [OSVRMfg.NTx86.10]
@@ -51,7 +55,7 @@ DefaultDestDir=12
 
 [OSVRMfg.NTarm.10]
 
-; Windows 8.1 and below
+; Windows 8.1 and below, all architectures
 [OSVRMfg.NT]
 %OSVR_HMD_CDC%=OSVR_HMD_CDC, USB\VID_1532&PID_0B00&MI_00
 
@@ -67,11 +71,12 @@ DefaultDestDir=12
 [OSVRMfg.NTarm]
 %OSVR_HMD_CDC%=OSVR_HMD_CDC, USB\VID_1532&PID_0B00&MI_00
 
-;;;;;;;;;;;;;;;;;;;
-; CDC control port
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; "DDInstall" and related sections for CDC control port
 ;
 ; As recommended at https://support.microsoft.com/en-us/kb/837637
 ; and https://msdn.microsoft.com/en-us/library/ff542605(v=vs.85).aspx
+
 [OSVR_HMD_CDC.NT]
 Include=mdmcpq.inf
 CopyFiles=FakeModemCopyFileSection
@@ -84,11 +89,16 @@ AddService=usbser, %ServiceFlags%, LowerFilter_Service_Inst
 Include=mdmcpq.inf
 AddReg=LowerFilterAddReg
 
+;;;;;;;;;;;;;;;;;;;;;;;;;
+; Strings (and constants)
+
 [Strings]
-Manufacturer = "Sensics"
+Manufacturer = "Sensics, Inc."
 OSVR_HMD_CDC = "OSVR HMD Communication Device"
 FILENAME = "osvr_cdc"
 
 ; non-localizable
 ; set as the default function driver for this device
+; (this is the difference from the MSDN sample that's required for just
+; a plain CDC serial port.)
 ServiceFlags=0x00000002
