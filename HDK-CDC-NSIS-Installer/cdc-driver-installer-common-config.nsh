@@ -20,13 +20,12 @@
 
 
 !define PRODUCT_NAME "OSVR HMD CDC Driver"
-!define PRODUCT_VERSION "1.0"
 !define PRODUCT_PUBLISHER "Sensics, Inc."
 SetCompressor lzma
 
 !include "x64.nsh"
 
-Name "${PRODUCT_NAME} ${PRODUCT_VERSION}"
+Name "${PRODUCT_NAME}"
 InstallDir "$TEMP\${PRODUCT_PUBLISHER} ${PRODUCT_NAME}"
 
 RequestExecutionLevel "admin"

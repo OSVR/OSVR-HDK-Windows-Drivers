@@ -52,11 +52,9 @@ Section
 
   StrCpy $DPINST_ARGS_RUNTIME ""
   IfSilent 0 SkipSilentFlag
-  DetailPrint "silent-ish"
   StrCpy $DPINST_ARGS_RUNTIME "/sw" ; dpinst takes this arg to be silent-ish.
   SkipSilentFlag:
 
-  DetailPrint "DPINST_ARGS_RUNTIME $DPINST_ARGS_RUNTIME"
   Var /GLOBAL DUMMY
   ${If} ${RunningX64}
     ExecWait '"$PLUGINSDIR\dpinst64.exe" ${DPINST_ARGS} $DPINST_ARGS_RUNTIME /PATH "$PLUGINSDIR"' $DUMMY ; dummy var to capture exit code
