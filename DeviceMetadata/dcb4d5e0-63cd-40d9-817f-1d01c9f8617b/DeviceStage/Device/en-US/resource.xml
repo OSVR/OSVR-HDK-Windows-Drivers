@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<stringTable xmlns="http://schemas.microsoft.com/windows/2008/deviceExperienceResources">
-  <string id="SET_LOGO1_TOOLTIP_RESOURCEID">SET_TOOLTIP1</string>
-  <string id="SET_MARKETINGBULLET1_RESOURCEID">SET_MARKETINGBULLET1</string>
-  <string id="SET_MARKETINGBULLET2_RESOURCEID">SET_MARKETINGBULLET2</string>
-  <string id="SET_MARKETINGBULLET3_RESOURCEID">SET_MARKETINGBULLET3</string>
-</stringTable>
