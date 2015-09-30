@@ -23,7 +23,7 @@
 
 !define DPINST_ARGS /SW
 
-OutFile "OSVR-HMD-CDC-Driver-Quiet.exe"
+OutFile "OSVR-HMD-CDC-Driver-Quiet-${VERSION_TAG}.exe"
 
 Icon "${OSVR_INSTALLER_ICON}"
 

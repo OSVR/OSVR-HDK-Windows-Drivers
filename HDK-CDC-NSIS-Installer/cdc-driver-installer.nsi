@@ -20,7 +20,7 @@
 ; Shared starting stuff
 !include "cdc-driver-installer-common-config.nsh"
 
-OutFile "OSVR-HMD-CDC-Driver.exe"
+OutFile "OSVR-HMD-CDC-Driver-${VERSION_TAG}.exe"
 
 ShowInstDetails show
 
