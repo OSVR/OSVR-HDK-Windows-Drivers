@@ -33,7 +33,7 @@ CatalogFile = %filename%.cat
 ;CatalogFile.NTamd64 = %filename%_amd64.cat
 ;CatalogFile.NTarm = %filename%_arm.cat
 
-DriverVer=09/29/2015,6.4.1.0
+DriverVer=09/30/2015,6.4.1.1
 DriverPackageType=PlugAndPlay
 DriverPackageDisplayName = %PackageDisplayName%
 
@@ -78,17 +78,22 @@ DefaultDestDir=12
 ;
 ; As recommended at https://support.microsoft.com/en-us/kb/837637
 ; and https://msdn.microsoft.com/en-us/library/ff542605(v=vs.85).aspx
-
+;
+; Some additions required.
 [OSVR_HMD_CDC.NT]
-Include=mdmcpq.inf
+Include=mdmcpq.inf,msports.inf
+;Needs=SerialEnumerator.NT ; serenum - appears to not be needed
 CopyFiles=FakeModemCopyFileSection
+AddReg=ComPort.NT.AddReg ; for MsPorts.dll,SerialPortPropPageProvider
 
 [OSVR_HMD_CDC.NT.Services]
 Include=mdmcpq.inf
 AddService=usbser, %ServiceFlags%, LowerFilter_Service_Inst
+;Needs=SerialEnumerator.NT.Services ; serenum, add msports.inf to include
 
 [OSVR_HMD_CDC.NT.HW]
 Include=mdmcpq.inf
+;Needs=ComPort.NT.HW ; serenum, add msports.inf to include
 AddReg=LowerFilterAddReg
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;
