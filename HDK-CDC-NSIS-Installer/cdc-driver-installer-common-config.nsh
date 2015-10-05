@@ -18,7 +18,7 @@
 ; See the License for the specific language governing permissions and
 ; limitations under the License.
 
-!define VERSION_TAG "v1.1"
+!define VERSION_TAG "v${DRIVER_VER}"
 !define PRODUCT_NAME "OSVR HMD CDC Driver"
 !define PRODUCT_PUBLISHER "Sensics, Inc."
 SetCompressor lzma
