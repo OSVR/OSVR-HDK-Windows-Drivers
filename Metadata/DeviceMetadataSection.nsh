@@ -25,8 +25,8 @@ Section -DeviceMetadata
 
   ; Metadata Files
   File "${REPO_ROOT}\Metadata\Output\HMDOnly\*.devicemetadata-ms"
-  File "${REPO_ROOT}\Output\BeltBox\*.devicemetadata-ms"
-  File "${REPO_ROOT}\Output\TrackingCamera\*.devicemetadata-ms"
+  File "${REPO_ROOT}\Metadata\Output\BeltBox\*.devicemetadata-ms"
+  File "${REPO_ROOT}\Metadata\Output\TrackingCamera\*.devicemetadata-ms"
 
   ExecWait "PowerShell.exe -NoProfile -NonInteractive -NoLogo -ExecutionPolicy Unrestricted -Command '.\install-metadata.ps1'"
 
