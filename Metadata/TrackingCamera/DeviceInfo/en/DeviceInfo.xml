@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DeviceInfo xmlns="http://schemas.microsoft.com/windows/DeviceMetadata/DeviceInfo/2007/11/">
+  <DeviceCategoryList>
+    <DeviceCategory>Imaging.Webcam</DeviceCategory>
+    <DeviceCategory>Sensor.Location</DeviceCategory>
+  </DeviceCategoryList>
+  <ModelName>OSVR HDK IR Tracking Camera</ModelName>
+  <DeviceDescription1>Infrared camera for HDK positional tracking.</DeviceDescription1>
+  <DeviceDescription2>Not intended for typical use as a webcam.</DeviceDescription2>
+  <ModelNumber>OSVR HDK v1.x IR Camera</ModelNumber>
+  <Manufacturer>Razer (Asia-Pacific) Pte Ltd.</Manufacturer>
+  <DeviceIconFile>HDK-IR-Camera.ico</DeviceIconFile>
+</DeviceInfo>

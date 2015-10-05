@@ -147,3 +147,4 @@ def process_dir(dirname):
 
 process_dir("HMDOnly")
 process_dir("BeltBox")
+process_dir("TrackingCamera")
