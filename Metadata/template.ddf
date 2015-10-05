@@ -1,0 +1,10 @@
+;*** Makecab Directive file example
+;
+.OPTION EXPLICIT ; Generate errors
+.Set CabinetNameTemplate={{cabname}}
+.Set DiskDirectoryTemplate=CDROM ; All cabinets go in a single directory
+.Set CompressionType=MSZIP
+.Set UniqueFiles="OFF"
+.Set Cabinet=on
+.Set DiskDirectory1={{out_dir}}
+{% for dir in dirs %}{{ dir }}{% endfor %}

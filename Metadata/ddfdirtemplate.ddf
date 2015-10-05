@@ -1,0 +1,4 @@
+.Set DestinationDir={{dest_dir}}
+{% for fn in files %}
+{{ path_join(root, fn) }}
+{% endfor %}
