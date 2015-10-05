@@ -146,3 +146,4 @@ def process_dir(dirname):
     metadata.pack_cab_into(staging_dir)
 
 process_dir("HMDOnly")
+process_dir("BeltBox")

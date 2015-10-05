@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PackageInfo xmlns="http://schemas.microsoft.com/windows/DeviceMetadata/PackageInfo/2007/11/">
+  <MetadataKey>
+    <HardwareIDList>
+      <HardwareID>DOID:USB\VID_0572&amp;PID_1410&amp;REV_9000</HardwareID>
+    </HardwareIDList>
+    <Locale default="true">en</Locale>
+    <LastModifiedDate>{{ last_modified }}</LastModifiedDate>
+    <MultipleLocale xmlns="http://schemas.microsoft.com/windows/2010/08/DeviceMetadata/PackageInfov2">true</MultipleLocale>
+  </MetadataKey>
+  <PackageStructure>
+    <Metadata MetadataID="http://schemas.microsoft.com/windows/DeviceMetadata/PackageInfo/2007/11/">PackageInfo.xml</Metadata>
+    <Metadata MetadataID="http://schemas.microsoft.com/windows/DeviceMetadata/DeviceInfo/2007/11/">DeviceInformation</Metadata>
+    <Metadata MetadataID="http://schemas.microsoft.com/windows/DeviceMetadata/WindowsInfo/2007/11/">WindowsInformation</Metadata>
+  </PackageStructure>
+  <Relationships>
+    <ExperienceID>{{ experience_guid }}</ExperienceID>
+  </Relationships>
+  <MetadataBuilderInformation>
+    <Application>Microsoft Device Metadata Package Authoring Tool</Application>
+    <Version>10.0.10240.16384</Version>
+  </MetadataBuilderInformation>
+</PackageInfo>
