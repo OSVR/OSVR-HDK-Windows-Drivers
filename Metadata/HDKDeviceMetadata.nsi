@@ -63,22 +63,4 @@ ShowInstDetails show
 ;  SetOverwrite ifnewer
 ;SectionEnd
 
-
-Section
-  InitPluginsDir
-  SetOutPath "$PLUGINSDIR"
-  ; PowerShell install script
-  File "MetadataInstallScript\install-metadata.ps1"
-
-  ; Metadata Files
-  File "Output\HMDOnly\*.devicemetadata-ms"
-  ;File "Output\BeltBox\*.devicemetadata-ms"
-  ;File "Output\TrackingCamera\*.devicemetadata-ms"
-
-  ExecWait "PowerShell.exe -NoProfile -NonInteractive -NoLogo -ExecutionPolicy Unrestricted -Command '.\install-metadata.ps1'"
-
-  RMDir /r $PLUGINSDIR
-  SetErrorLevel 0
-  ;SetOutPath $TEMP
-  ;RMDir /r $INSTDIR
-SectionEnd
+!include "DeviceMetadataSection.nsh"

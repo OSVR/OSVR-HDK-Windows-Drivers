@@ -4,9 +4,8 @@ call "%~dp0..\shared.cmd"
 
 pushd "%~dp0"
 rem Remove old build products
-del *.exe >nul
+del /s /q Output\*.* >nul
 
-"%NSIS_DIR%\makensis" /DDRIVER_VER="%DRIVER_VER%" HDKDeviceMetadata.nsi
-
+python build-metadata.py
 popd
 pause
