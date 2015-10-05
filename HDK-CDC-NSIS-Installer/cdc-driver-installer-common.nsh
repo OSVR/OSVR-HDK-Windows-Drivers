@@ -19,6 +19,7 @@
 ; limitations under the License.
 
 
+!include LogicLib.nsh
 
 
 
@@ -28,9 +29,11 @@
 ;SectionEnd
 
 
-Section
+Section -CDC_INF
   InitPluginsDir
   SetOutPath "$PLUGINSDIR"
+  DetailPrint "Temporarily extracting driver inf and cat along with installation tool."
+
   ; CDC driver inf
   File "${REPO_ROOT}\HDK-CDC\osvr_cdc.inf"
 
@@ -55,15 +58,30 @@ Section
   StrCpy $DPINST_ARGS_RUNTIME "/sw" ; dpinst takes this arg to be silent-ish.
   SkipSilentFlag:
 
-  Var /GLOBAL DUMMY
+  DetailPrint "Running 'DPInst' driver installation tool."
+  Var /GLOBAL DPINST_RET
   ${If} ${RunningX64}
-    ExecWait '"$PLUGINSDIR\dpinst64.exe" ${DPINST_ARGS} $DPINST_ARGS_RUNTIME /PATH "$PLUGINSDIR"' $DUMMY ; dummy var to capture exit code
+    ExecWait '"$PLUGINSDIR\dpinst64.exe" ${DPINST_ARGS} $DPINST_ARGS_RUNTIME /PATH "$PLUGINSDIR"' $DPINST_RET
   ${Else}
-    ExecWait '"$PLUGINSDIR\dpinst32.exe" ${DPINST_ARGS} $DPINST_ARGS_RUNTIME /PATH "$PLUGINSDIR"' $DUMMY ; dummy var to capture exit code
+    ExecWait '"$PLUGINSDIR\dpinst32.exe" ${DPINST_ARGS} $DPINST_ARGS_RUNTIME /PATH "$PLUGINSDIR"' $DPINST_RET
   ${EndIf}
 
-  RMDir /r $PLUGINSDIR
-  SetErrorLevel 0
+
+  DetailPrint "'DPInst' completed with exit code $DPINST_RET."
+
+  ; 512 is two drivers copied to the driver store, or any combination of up to 2 successes.
+  ${If} $DPINST_RET U> 512
+    DetailPrint "DPInst returned a value indicating a driver failed to install: $DPINST_RET"
+    SetDetailsView show
+    SetErrorLevel $DPINST_RET
+    SetAutoClose false
+  ${Else}
+    DetailPrint "Cleaning up temporary files."
+    RMDir /r $PLUGINSDIR
+    DetailPrint "Driver installation complete."
+    SetErrorLevel 0
+  ${EndIf}
+
   ;SetOutPath $TEMP
   ;RMDir /r $INSTDIR
 SectionEnd

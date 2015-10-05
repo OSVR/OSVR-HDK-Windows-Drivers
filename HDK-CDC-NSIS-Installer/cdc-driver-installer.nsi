@@ -22,13 +22,11 @@
 
 OutFile "OSVR-HMD-CDC-Driver-${VERSION_TAG}.exe"
 
-ShowInstDetails show
-
+ShowInstDetails hide
+AutoCloseWindow true
 !define DPINST_ARGS
 
-
-; MUI 1.67 compatible ------
-!include "MUI.nsh"
+!include "MUI2.nsh"
 
 ; MUI Settings
 !define MUI_ABORTWARNING
@@ -46,9 +44,6 @@ ShowInstDetails show
 
 ; Language files
 !insertmacro MUI_LANGUAGE "English"
-
-; Reserve files
-!insertmacro MUI_RESERVEFILE_INSTALLOPTIONS
 
 ; MUI end ------
 
