@@ -20,16 +20,17 @@
 
 
 !include LogicLib.nsh
+!include WinVer.nsh
 
-
+ManifestSupportedOS WinVista Win7 Win8 {8e0f7a12-bfb3-4fe8-b9a5-48fd50a15a9a}
 
 ;Section -SETTINGS
 ;  SetOutPath "$INSTDIR"
 ;  SetOverwrite ifnewer
 ;SectionEnd
 
-
 Section -CDC_INF
+  Var /GLOBAL DPINST_RET
   InitPluginsDir
   SetOutPath "$PLUGINSDIR"
   DetailPrint "Temporarily extracting driver inf and cat along with installation tool."
@@ -58,29 +59,35 @@ Section -CDC_INF
   StrCpy $DPINST_ARGS_RUNTIME "/sw" ; dpinst takes this arg to be silent-ish.
   SkipSilentFlag:
 
-  DetailPrint "Running 'DPInst' driver installation tool."
-  Var /GLOBAL DPINST_RET
-  ${If} ${RunningX64}
-    ExecWait '"$PLUGINSDIR\dpinst64.exe" ${DPINST_ARGS} $DPINST_ARGS_RUNTIME /PATH "$PLUGINSDIR"' $DPINST_RET
-  ${Else}
-    ExecWait '"$PLUGINSDIR\dpinst32.exe" ${DPINST_ARGS} $DPINST_ARGS_RUNTIME /PATH "$PLUGINSDIR"' $DPINST_RET
-  ${EndIf}
-
-
-  DetailPrint "'DPInst' completed with exit code $DPINST_RET."
-
-  ; 512 is two drivers copied to the driver store, or any combination of up to 2 successes.
-  ${If} $DPINST_RET U> 512
-    DetailPrint "DPInst returned a value indicating a driver failed to install: $DPINST_RET"
+  ${If} ${AtLeastWin10}
+    DetailPrint "Windows 10 does not need USB-CDC driver installed."
     SetDetailsView show
-    SetErrorLevel $DPINST_RET
     SetAutoClose false
   ${Else}
-    DetailPrint "Cleaning up temporary files."
-    RMDir /r $PLUGINSDIR
-    DetailPrint "Driver installation complete."
-    SetErrorLevel 0
+    DetailPrint "Running 'DPInst' driver installation tool."
+    ${If} ${RunningX64}
+      ExecWait '"$PLUGINSDIR\dpinst64.exe" ${DPINST_ARGS} $DPINST_ARGS_RUNTIME /PATH "$PLUGINSDIR"' $DPINST_RET
+    ${Else}
+      ExecWait '"$PLUGINSDIR\dpinst32.exe" ${DPINST_ARGS} $DPINST_ARGS_RUNTIME /PATH "$PLUGINSDIR"' $DPINST_RET
+    ${EndIf}
+
+
+    DetailPrint "'DPInst' completed with exit code $DPINST_RET."
+
+    ; 512 is two drivers copied to the driver store, or any combination of up to 2 successes.
+    ${If} $DPINST_RET U> 512
+      DetailPrint "DPInst returned a value indicating a driver failed to install: $DPINST_RET"
+      SetErrorLevel $DPINST_RET
+      SetDetailsView show
+      SetAutoClose false
+    ${Else}
+      DetailPrint "Driver installation completed successfully."
+      SetErrorLevel 0
+    ${EndIf}
+
   ${EndIf}
+  DetailPrint "Cleaning up temporary files."
+  RMDir /r $PLUGINSDIR
 
   ;SetOutPath $TEMP
   ;RMDir /r $INSTDIR
