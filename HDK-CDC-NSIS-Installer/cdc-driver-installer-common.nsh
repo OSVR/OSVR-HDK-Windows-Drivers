@@ -29,10 +29,12 @@ ManifestSupportedOS WinVista Win7 Win8 {8e0f7a12-bfb3-4fe8-b9a5-48fd50a15a9a}
 ;  SetOverwrite ifnewer
 ;SectionEnd
 
+Var DPINST_ARGS_RUNTIME
+
 Section -CDC_INF
   Var /GLOBAL DPINST_RET
   InitPluginsDir
-  SetOutPath "$PLUGINSDIR"
+  SetOutPath "$PLUGINSDIR\cdc"
   DetailPrint "Temporarily extracting driver inf and cat along with installation tool."
 
   ; CDC driver inf
@@ -42,17 +44,17 @@ Section -CDC_INF
   File "${REPO_ROOT}\HDK-CDC\osvr_cdc.cat"
 
   ; DIFx/DPInst configuration file
-  File "dpinst.xml"
+  File "${REPO_ROOT}\HDK-CDC-NSIS-Installer\dpinst.xml"
 
-  File /oname=$PLUGINSDIR\osvr-installer.ico "${OSVR_INSTALLER_ICON}"
+  File /oname=osvr-installer.ico "${OSVR_INSTALLER_ICON}"
 
   ; Locally-vendored copies of dpinst from the WDK
   ; File /oname=$INSTDIR\dpinst32.exe redist\wdk10\x86\dpinst.exe
   ; File /oname=$INSTDIR\dpinst64.exe redist\wdk10\x64\dpinst.exe
 
   ; Directly-sourced versions of dpinst from the WDK, specified as a command-line define.
-  File /oname=$PLUGINSDIR\dpinst32.exe "${WDK_DIR}\Redist\DIFx\dpinst\MultiLin\x86\dpinst.exe"
-  File /oname=$PLUGINSDIR\dpinst64.exe "${WDK_DIR}\Redist\DIFx\dpinst\MultiLin\x64\dpinst.exe"
+  File /oname=dpinst32.exe "${WDK_DIR}\Redist\DIFx\dpinst\MultiLin\x86\dpinst.exe"
+  File /oname=dpinst64.exe "${WDK_DIR}\Redist\DIFx\dpinst\MultiLin\x64\dpinst.exe"
 
   StrCpy $DPINST_ARGS_RUNTIME ""
   IfSilent 0 SkipSilentFlag
@@ -66,9 +68,9 @@ Section -CDC_INF
   ${Else}
     DetailPrint "Running 'DPInst' driver installation tool."
     ${If} ${RunningX64}
-      ExecWait '"$PLUGINSDIR\dpinst64.exe" ${DPINST_ARGS} $DPINST_ARGS_RUNTIME /PATH "$PLUGINSDIR"' $DPINST_RET
+      ExecWait '"$PLUGINSDIR\dpinst64.exe" $DPINST_ARGS_RUNTIME /PATH "$PLUGINSDIR"' $DPINST_RET
     ${Else}
-      ExecWait '"$PLUGINSDIR\dpinst32.exe" ${DPINST_ARGS} $DPINST_ARGS_RUNTIME /PATH "$PLUGINSDIR"' $DPINST_RET
+      ExecWait '"$PLUGINSDIR\dpinst32.exe" $DPINST_ARGS_RUNTIME /PATH "$PLUGINSDIR"' $DPINST_RET
     ${EndIf}
 
 
@@ -87,7 +89,9 @@ Section -CDC_INF
 
   ${EndIf}
   DetailPrint "Cleaning up temporary files."
-  RMDir /r $PLUGINSDIR
+
+  SetOutPath $TEMP
+  RMDir /r "$PLUGINSDIR\cdc"
 
   ;SetOutPath $TEMP
   ;RMDir /r $INSTDIR
