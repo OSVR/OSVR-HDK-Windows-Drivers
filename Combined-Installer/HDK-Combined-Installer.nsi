@@ -30,7 +30,7 @@ InstallDir "$TEMP\${PRODUCT_PUBLISHER} ${PRODUCT_NAME}"
 RequestExecutionLevel "admin"
 
 !define REPO_ROOT ".."
-!define OSVR_INSTALLER_ICON "${REPO_ROOT}\installer-icon\installer.ico"
+!define INSTALLER_ICON "${REPO_ROOT}\installer-icon\installer.ico"
 
 
 OutFile "OSVR-HDK-Combined-Driver-Installer-${DRIVER_VER}.exe"

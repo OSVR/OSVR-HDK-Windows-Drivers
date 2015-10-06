@@ -46,7 +46,7 @@ Section -CDC_INF
   ; DIFx/DPInst configuration file
   File "${REPO_ROOT}\HDK-CDC-NSIS-Installer\dpinst.xml"
 
-  File /oname=osvr-installer.ico "${OSVR_INSTALLER_ICON}"
+  File /oname=installer.ico "${INSTALLER_ICON}"
 
   ; Locally-vendored copies of dpinst from the WDK
   ; File /oname=$INSTDIR\dpinst32.exe redist\wdk10\x86\dpinst.exe

@@ -31,6 +31,4 @@ InstallDir "$TEMP\${PRODUCT_PUBLISHER} ${PRODUCT_NAME}"
 RequestExecutionLevel "admin"
 
 !define REPO_ROOT ".."
-!define OSVR_INSTALLER_ICON "${REPO_ROOT}\installer-icon\installer.ico"
-
-Var DPINST_ARGS_RUNTIME
+!define INSTALLER_ICON "${REPO_ROOT}\installer-icon\installer.ico"

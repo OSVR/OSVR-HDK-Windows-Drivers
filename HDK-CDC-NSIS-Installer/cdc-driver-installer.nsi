@@ -24,14 +24,13 @@ OutFile "OSVR-HMD-CDC-Driver-${VERSION_TAG}.exe"
 
 ShowInstDetails hide
 AutoCloseWindow true
-!define DPINST_ARGS
 
 !include "MUI2.nsh"
 
 ; MUI Settings
 !define MUI_ABORTWARNING
 ;!define MUI_ICON "${NSISDIR}\Contrib\Graphics\Icons\modern-install.ico"
-!define MUI_ICON "${OSVR_INSTALLER_ICON}"
+!define MUI_ICON "${INSTALLER_ICON}"
 
 ; Welcome page
 ;!insertmacro MUI_PAGE_WELCOME

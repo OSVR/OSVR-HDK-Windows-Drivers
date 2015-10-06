@@ -8,7 +8,7 @@
     <subDirectory>*</subDirectory>
   </search>
 
-  <icon>osvr-installer.ico</icon>
+  <icon>installer.ico</icon>
 
   <!-- The following language element localizes its child elements
      for the English (Standard) language. The child elements
