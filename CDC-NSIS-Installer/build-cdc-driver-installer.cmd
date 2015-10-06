@@ -9,3 +9,4 @@ del *.exe >nul
 "%NSIS_DIR%\makensis" /DWDK_DIR="%WDK_DIR%" /DDRIVER_VER="%DRIVER_VER%" cdc-driver-installer.nsi
 
 popd
+pause
