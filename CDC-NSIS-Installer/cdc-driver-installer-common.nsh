@@ -31,6 +31,8 @@ ManifestSupportedOS WinVista Win7 Win8 {8e0f7a12-bfb3-4fe8-b9a5-48fd50a15a9a}
 
 Var DPINST_ARGS_RUNTIME
 
+!define DRIVER_NAME osvr_cdc
+
 Section -CDC_INF
   Var /GLOBAL DPINST_RET
   !define CDC_DIR $PLUGINSDIR\cdc
@@ -40,10 +42,10 @@ Section -CDC_INF
   DetailPrint "Temporarily extracting driver inf and cat along with installation tool."
 
   ; CDC driver inf
-  File "${CDC_SRC_DIR}\osvr_cdc.inf"
+  File "${CDC_SRC_DIR}\${DRIVER_NAME}.inf"
 
   ; Signed catalog file
-  File "${CDC_SRC_DIR}\osvr_cdc.cat"
+  File "${CDC_SRC_DIR}\${DRIVER_NAME}.cat"
 
   ; DIFx/DPInst configuration file
   File "${REPO_ROOT}\CDC-NSIS-Installer\dpinst.xml"
