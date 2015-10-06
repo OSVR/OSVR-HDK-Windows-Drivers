@@ -1,8 +1,8 @@
 pushd "%~dp0"
-pushd HDK-CDC
+pushd CDC
 call generate-cat.cmd
 popd
-pushd HDK-CDC-NSIS-Installer
+pushd CDC-NSIS-Installer
 call build-cdc-driver-installer.cmd
 popd
 popd
