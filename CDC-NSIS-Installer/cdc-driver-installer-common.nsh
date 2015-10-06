@@ -34,7 +34,7 @@ Var DPINST_ARGS_RUNTIME
 Section -CDC_INF
   Var /GLOBAL DPINST_RET
   !define CDC_DIR $PLUGINSDIR\cdc
-  !define CDC_SRC_DIR ${REPO_ROOT}\HDK-CDC
+  !define CDC_SRC_DIR ${REPO_ROOT}\CDC
   InitPluginsDir
   SetOutPath "${CDC_DIR}"
   DetailPrint "Temporarily extracting driver inf and cat along with installation tool."

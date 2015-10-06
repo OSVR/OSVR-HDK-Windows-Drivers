@@ -6,7 +6,7 @@ pushd "%~dp0"
 rem Remove old build products
 del *.exe >nul
 
-"%NSIS_DIR%\makensis" /DWDK_DIR="%WDK_DIR%" /DDRIVER_VER="%DRIVER_VER%" HDK-Combined-Installer.nsi
+"%NSIS_DIR%\makensis" /DWDK_DIR="%WDK_DIR%" /DDRIVER_VER="%DRIVER_VER%" Combined-Installer.nsi
 
 popd
 pause
