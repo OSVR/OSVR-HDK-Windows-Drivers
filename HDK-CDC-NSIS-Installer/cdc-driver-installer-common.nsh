@@ -33,15 +33,17 @@ Var DPINST_ARGS_RUNTIME
 
 Section -CDC_INF
   Var /GLOBAL DPINST_RET
+  !define CDC_DIR $PLUGINSDIR\cdc
+  !define CDC_SRC_DIR ${REPO_ROOT}\HDK-CDC
   InitPluginsDir
-  SetOutPath "$PLUGINSDIR\cdc"
+  SetOutPath "${CDC_DIR}"
   DetailPrint "Temporarily extracting driver inf and cat along with installation tool."
 
   ; CDC driver inf
-  File "${REPO_ROOT}\HDK-CDC\osvr_cdc.inf"
+  File "${CDC_SRC_DIR}\osvr_cdc.inf"
 
   ; Signed catalog file
-  File "${REPO_ROOT}\HDK-CDC\osvr_cdc.cat"
+  File "${CDC_SRC_DIR}\osvr_cdc.cat"
 
   ; DIFx/DPInst configuration file
   File "${REPO_ROOT}\HDK-CDC-NSIS-Installer\dpinst.xml"
@@ -68,13 +70,13 @@ Section -CDC_INF
   ${Else}
     DetailPrint "Running 'DPInst' driver installation tool."
     ${If} ${RunningX64}
-      ExecWait '"$PLUGINSDIR\dpinst64.exe" $DPINST_ARGS_RUNTIME /PATH "$PLUGINSDIR"' $DPINST_RET
+      ExecWait '"${CDC_DIR}\dpinst64.exe" $DPINST_ARGS_RUNTIME /PATH "${CDC_DIR}"' $DPINST_RET
     ${Else}
-      ExecWait '"$PLUGINSDIR\dpinst32.exe" $DPINST_ARGS_RUNTIME /PATH "$PLUGINSDIR"' $DPINST_RET
+      ExecWait '"${CDC_DIR}\dpinst32.exe" $DPINST_ARGS_RUNTIME /PATH "${CDC_DIR}"' $DPINST_RET
     ${EndIf}
 
 
-    DetailPrint "'DPInst' completed with exit code $DPINST_RET."
+    DetailPrint "'DPInst' completed with exit code $DPINST_RET"
 
     ; 512 is two drivers copied to the driver store, or any combination of up to 2 successes.
     ${If} $DPINST_RET U> 512
@@ -91,7 +93,7 @@ Section -CDC_INF
   DetailPrint "Cleaning up temporary files."
 
   SetOutPath $TEMP
-  RMDir /r "$PLUGINSDIR\cdc"
+  RMDir /r "${CDC_DIR}"
 
   ;SetOutPath $TEMP
   ;RMDir /r $INSTDIR
