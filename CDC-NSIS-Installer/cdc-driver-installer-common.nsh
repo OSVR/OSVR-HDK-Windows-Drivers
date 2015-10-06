@@ -46,7 +46,7 @@ Section -CDC_INF
   File "${CDC_SRC_DIR}\osvr_cdc.cat"
 
   ; DIFx/DPInst configuration file
-  File "${REPO_ROOT}\HDK-CDC-NSIS-Installer\dpinst.xml"
+  File "${REPO_ROOT}\CDC-NSIS-Installer\dpinst.xml"
 
   File /oname=installer.ico "${INSTALLER_ICON}"
 
