@@ -22,11 +22,11 @@ function Main()
 	if (!(Test-Path $dms)) {
 		New-Item -Path $dms -ItemType directory
 	}
+	Write-Host "Installing device metadata to store - $dms"
 	Get-ChildItem -Path $Root -Filter "*.devicemetadata-ms" -Recurse | ForEach-Object {
-		Write-Host $_.FullName
+		Write-Host $_.Name
 		Copy-Item $_.FullName $dms | Out-Null
 	}
-	#Copy-Item
 	#Read-Host "Press enter"
 }
 function Get-DeviceMetadataStore()
