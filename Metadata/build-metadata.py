@@ -67,11 +67,11 @@ class MetadataFile:
             self.process_dir(reldir, files)
 
         # Load the root XML file to find out the default locale
-        self.default_locale = self.read_default_locale()
+        self.read_package_info()
 
         # copy WindowsInformation/self.default_locale/* to WindowsInformation/
         # and similarly for DeviceInformation
-        for subdir in ['DeviceInformation', 'WindowsInformation']:
+        for subdir in self.locale_subdirs:
             self.copy_from_default_locale(subdir)
 
     def pack_cab_into(self, cab_dir):
@@ -80,13 +80,17 @@ class MetadataFile:
         ddf_file = os.path.join(self.output_dir, "devicemetadata.ddf")
         cab.generate(cab_input_dir, ddf_file, cab_dir, self.experience_guid + ".devicemetadata-ms")
 
-    def read_default_locale(self):
+    def read_package_info(self):
         # Find out the default locale
         import xml.etree.ElementTree as ET
         tree = ET.parse(self.get_input_path("PackageInfo.xml"))
         root = tree.getroot()
         ns = "{http://schemas.microsoft.com/windows/DeviceMetadata/PackageInfo/2007/11/}"
-        return root.findall(".//" + ns + "Locale[@default='true']")[0].text
+        self.default_locale = root.findall(".//" + ns + "Locale[@default='true']")[0].text
+        self.locale_subdirs = []
+        for id in ["http://schemas.microsoft.com/windows/DeviceMetadata/DeviceInfo/2007/11/", "http://schemas.microsoft.com/windows/DeviceMetadata/WindowsInfo/2007/11/"]:
+            self.locale_subdirs.extend([x.text for x in root.findall(".//" + ns + "Metadata[@MetadataID='" + id + "']")])
+        print(self.locale_subdirs)
 
     def copy_from_default_locale(self, subdir):
         default_locale_dir = self.get_output_path(os.path.join(subdir, self.default_locale))
