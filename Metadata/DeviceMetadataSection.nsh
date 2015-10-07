@@ -17,9 +17,14 @@
 ; See the License for the specific language governing permissions and
 ; limitations under the License.
 
+
+!define METADATA_DIR $PLUGINSDIR\metadata
+
+!include psexec.nsh
+
 Section -DeviceMetadata
   InitPluginsDir
-  SetOutPath "$PLUGINSDIR\metadata"
+  SetOutPath "${METADATA_DIR}"
   ; PowerShell install script
   File "${REPO_ROOT}\Metadata\MetadataInstallScript\install-metadata.ps1"
 
@@ -28,9 +33,10 @@ Section -DeviceMetadata
   File "${REPO_ROOT}\Metadata\Output\BeltBox\*.devicemetadata-ms"
   File "${REPO_ROOT}\Metadata\Output\TrackingCamera\*.devicemetadata-ms"
 
-  ExecWait "PowerShell.exe -NoProfile -NonInteractive -NoLogo -ExecutionPolicy Unrestricted -Command '.\install-metadata.ps1'"
+  ;ExecWait "PowerShell.exe -NoProfile -NoLogo -ExecutionPolicy Bypass -Command '${METADATA_DIR}\install-metadata.ps1'"
+  ${PowerShellExecFileLog} "${METADATA_DIR}\install-metadata.ps1"
 
   SetOutPath $TEMP
-  RMDir /r "$PLUGINSDIR\metadata"
+  RMDir /r "${METADATA_DIR}"
   SetErrorLevel 0
 SectionEnd
