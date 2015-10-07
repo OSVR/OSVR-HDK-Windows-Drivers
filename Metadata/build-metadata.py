@@ -50,7 +50,7 @@ class MetadataFile:
         self.env = jinja2.Environment(keep_trailing_newline = True, optimized = False, loader = MetadataTemplateLoader(self.input_dir))
         #self.env = jinja2.Environment(keep_trailing_newline = True, optimized = False, loader = jinja2.FileSystemLoader(self.input_dir))
 
-        self.env.globals["experience_guid"] = "{" + self.experience_guid + "}"
+        self.env.globals["experience_guid"] = self.experience_guid
         self.env.globals["last_modified"] = self.timestamp
 
 
