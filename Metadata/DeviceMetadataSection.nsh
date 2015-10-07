@@ -20,7 +20,7 @@
 
 !define METADATA_DIR $PLUGINSDIR\metadata
 
-!include psexec.nsh
+!include "${REPO_ROOT}\Metadata\psexec.nsh"
 
 Section -DeviceMetadata
   InitPluginsDir
