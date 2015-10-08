@@ -25,8 +25,11 @@
 Section -DeviceMetadata
   InitPluginsDir
   SetOutPath "${METADATA_DIR}"
-  ; PowerShell install script
-  File "${REPO_ROOT}\Metadata\MetadataInstallScript\install-metadata.ps1"
+
+  ; C# install tool
+  File "${REPO_ROOT}\Metadata\MetadataInstallTool\DeviceMetadataInstallTool.exe"
+  File "${REPO_ROOT}\Metadata\MetadataInstallTool\DeviceMetadataInstallTool.exe.config"
+  File "${REPO_ROOT}\Metadata\MetadataInstallTool\Sensics.*.dll"
 
   ; Metadata Files
   File "${REPO_ROOT}\Metadata\Output\HMDOnly\*.devicemetadata-ms"
@@ -34,7 +37,10 @@ Section -DeviceMetadata
   File "${REPO_ROOT}\Metadata\Output\TrackingCamera\*.devicemetadata-ms"
 
   ;ExecWait "PowerShell.exe -NoProfile -NoLogo -ExecutionPolicy Bypass -Command '${METADATA_DIR}\install-metadata.ps1'"
-  ${PowerShellExecFileLog} "${METADATA_DIR}\install-metadata.ps1"
+  ;${PowerShellExecFileLog} "${METADATA_DIR}\install-metadata.ps1"
+  ;ExecWait '${METADATA_DIR}\DeviceMetadataInstallTool.exe "${METADATA_DIR}"'
+  nsExec::ExecToLog '"${METADATA_DIR}\DeviceMetadataInstallTool.exe" "${METADATA_DIR}"'
+  Pop $0
 
   SetOutPath $TEMP
   RMDir /r "${METADATA_DIR}"
