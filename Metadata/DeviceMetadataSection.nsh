@@ -17,32 +17,37 @@
 ; See the License for the specific language governing permissions and
 ; limitations under the License.
 
+!include LogicLib.nsh
+!include WinVer.nsh
 
 !define METADATA_DIR $PLUGINSDIR\metadata
 
 !include "${REPO_ROOT}\Metadata\psexec.nsh"
 
 Section -DeviceMetadata
-  InitPluginsDir
-  SetOutPath "${METADATA_DIR}"
+  ${If} ${AtLeastWin7}
+    InitPluginsDir
+    SetOutPath "${METADATA_DIR}"
 
-  ; C# install tool
-  File "${REPO_ROOT}\Metadata\MetadataInstallTool\DeviceMetadataInstallTool.exe"
-  File "${REPO_ROOT}\Metadata\MetadataInstallTool\DeviceMetadataInstallTool.exe.config"
-  File "${REPO_ROOT}\Metadata\MetadataInstallTool\Sensics.*.dll"
+    ; C# install tool
+    File "${REPO_ROOT}\Metadata\MetadataInstallTool\DeviceMetadataInstallTool.exe"
+    File "${REPO_ROOT}\Metadata\MetadataInstallTool\DeviceMetadataInstallTool.exe.config"
+    File "${REPO_ROOT}\Metadata\MetadataInstallTool\Sensics.*.dll"
 
-  ; Metadata Files
-  File "${REPO_ROOT}\Metadata\Output\HMDOnly\*.devicemetadata-ms"
-  File "${REPO_ROOT}\Metadata\Output\BeltBox\*.devicemetadata-ms"
-  File "${REPO_ROOT}\Metadata\Output\TrackingCamera\*.devicemetadata-ms"
+    ; Metadata Files
+    File "${REPO_ROOT}\Metadata\Output\HMDOnly\*.devicemetadata-ms"
+    File "${REPO_ROOT}\Metadata\Output\BeltBox\*.devicemetadata-ms"
+    File "${REPO_ROOT}\Metadata\Output\TrackingCamera\*.devicemetadata-ms"
 
-  ;ExecWait "PowerShell.exe -NoProfile -NoLogo -ExecutionPolicy Bypass -Command '${METADATA_DIR}\install-metadata.ps1'"
-  ;${PowerShellExecFileLog} "${METADATA_DIR}\install-metadata.ps1"
-  ;ExecWait '${METADATA_DIR}\DeviceMetadataInstallTool.exe "${METADATA_DIR}"'
-  nsExec::ExecToLog '"${METADATA_DIR}\DeviceMetadataInstallTool.exe" "${METADATA_DIR}"'
-  Pop $0
+    ; Run the metadata installer.
+    nsExec::ExecToLog '"${METADATA_DIR}\DeviceMetadataInstallTool.exe" "${METADATA_DIR}"'
+    Pop $0
 
-  SetOutPath $TEMP
-  RMDir /r "${METADATA_DIR}"
-  SetErrorLevel 0
+    SetOutPath $TEMP
+    RMDir /r "${METADATA_DIR}"
+    SetErrorLevel 0
+  ${Else}
+    DetailPrint "Device Metadata is only usable on Windows 7 and newer."
+    SetErrorLevel 1
+  ${EndIf}
 SectionEnd
