@@ -22,8 +22,6 @@
 
 !define METADATA_DIR $PLUGINSDIR\metadata
 
-!include "${REPO_ROOT}\Metadata\psexec.nsh"
-
 Section -DeviceMetadata
   ${If} ${AtLeastWin7}
     InitPluginsDir
