@@ -6,5 +6,7 @@
 .Set CompressionType=MSZIP
 .Set UniqueFiles="OFF"
 .Set Cabinet=on
+.Set Compress=on
+.Set GenerateInf="OFF"
 .Set DiskDirectory1={{out_dir}}
 {% for dir in dirs %}{{ dir }}{% endfor %}
