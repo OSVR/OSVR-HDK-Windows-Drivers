@@ -16,7 +16,7 @@
   <language code="0x0409">
     <dpinstTitle>OSVR HDK Driver Updater</dpinstTitle>
     <welcomeTitle>Welcome to the OSVR HDK Driver Installer!</welcomeTitle>
-    <welcomeIntro>This wizard will walk you through updating the communication/service drivers for your HMD.</welcomeIntro>
+    <welcomeIntro>This wizard will walk you through updating the drivers for your HMD.</welcomeIntro>
     <installHeaderTitle>Installing the software for your device...</installHeaderTitle>
     <finishTitle>Congratulations! You finished installing your device drivers.</finishTitle>
   </language>
