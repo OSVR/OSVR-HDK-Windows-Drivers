@@ -64,6 +64,11 @@ Section -CDC_INF
   File "${INF_SRC_DIR}\${HID_DRIVER_NAME}.inf"
   File "${INF_SRC_DIR}\${HID_DRIVER_NAME}.cat"
 
+  ; Nearly-dummy IR camera driver inf + signed catalog file
+  DetailPrint "IR camera driver:"
+  File "${INF_SRC_DIR}\osvr_hdk_ircam.inf"
+  File "${INF_SRC_DIR}\osvr_hdk_ircam.cat"
+
   DetailPrint "Driver installer support files:"
   ; DIFx/DPInst configuration file
   File "${REPO_ROOT}\Inf-NSIS-Installer\dpinst.xml"
