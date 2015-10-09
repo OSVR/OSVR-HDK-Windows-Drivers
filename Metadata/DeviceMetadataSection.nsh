@@ -28,17 +28,20 @@ Section -DeviceMetadata
     SetOutPath "${METADATA_DIR}"
 
     ; C# install tool
+    DetailPrint "Device metadata install tool:"
     File "${REPO_ROOT}\Metadata\MetadataInstallTool\DeviceMetadataInstallTool.exe"
     File "${REPO_ROOT}\Metadata\MetadataInstallTool\DeviceMetadataInstallTool.exe.config"
     File "${REPO_ROOT}\Metadata\MetadataInstallTool\Sensics.*.dll"
 
     ; Metadata Files
+    DetailPrint "Device metadata packages:"
     File "${REPO_ROOT}\Metadata\Output\HMDDisplay\*.devicemetadata-ms"
     File "${REPO_ROOT}\Metadata\Output\HMDOnly\*.devicemetadata-ms"
     File "${REPO_ROOT}\Metadata\Output\BeltBox\*.devicemetadata-ms"
     File "${REPO_ROOT}\Metadata\Output\TrackingCamera\*.devicemetadata-ms"
 
     ; Run the metadata installer.
+    DetailPrint "Running device metadata install tool"
     nsExec::ExecToLog '"${METADATA_DIR}\DeviceMetadataInstallTool.exe" "${METADATA_DIR}"'
     Pop $0
 
@@ -47,6 +50,5 @@ Section -DeviceMetadata
     SetErrorLevel 0
   ${Else}
     DetailPrint "Device Metadata is only usable on Windows 7 and newer."
-    SetErrorLevel 1
   ${EndIf}
 SectionEnd
