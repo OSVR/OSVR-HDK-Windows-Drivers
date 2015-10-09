@@ -1,4 +1,4 @@
-; Install wrapper for OSVR HMD controller CDC serial port inf
+; Install wrapper for OSVR HMD controller CDC serial port + other infs
 ; Common config code between silent and "normal" installer
 ;
 ; Part of OSVR
@@ -19,7 +19,7 @@
 ; limitations under the License.
 
 !define VERSION_TAG "v${DRIVER_VER}"
-!define PRODUCT_NAME "OSVR HMD CDC Driver"
+!define PRODUCT_NAME "OSVR HMD CDC and Display Driver"
 !define PRODUCT_PUBLISHER "Sensics, Inc."
 SetCompressor lzma
 

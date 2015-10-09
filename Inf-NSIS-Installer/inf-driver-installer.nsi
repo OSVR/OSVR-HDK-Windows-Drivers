@@ -1,4 +1,4 @@
-; Install wrapper for OSVR HMD controller CDC serial port inf
+; Install wrapper for OSVR HMD controller CDC serial port + other infs
 ;
 ; Part of OSVR
 ; Authored by Sensics, Inc. <http://sensics.com/osvr>
@@ -18,9 +18,9 @@
 ; limitations under the License.
 
 ; Shared starting stuff
-!include "cdc-driver-installer-common-config.nsh"
+!include "inf-driver-installer-common-config.nsh"
 
-OutFile "OSVR-HMD-CDC-Driver-${VERSION_TAG}.exe"
+OutFile "OSVR-HMD-Inf-Driver-${VERSION_TAG}.exe"
 
 ShowInstDetails hide
 AutoCloseWindow true
@@ -47,4 +47,4 @@ AutoCloseWindow true
 ; MUI end ------
 
 ; Shared ending stuff - the meat of the installer
-!include "cdc-driver-installer-common.nsh"
+!include "inf-driver-installer-common.nsh"

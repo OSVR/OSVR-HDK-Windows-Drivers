@@ -1,4 +1,4 @@
-; Install wrapper for OSVR HMD controller CDC serial port inf
+; Install wrapper for OSVR HMD controller CDC serial port + other infs
 ; Common code between silent and "normal" installer
 ;
 ; Part of OSVR
@@ -31,24 +31,22 @@ ManifestSupportedOS WinVista Win7 Win8 {8e0f7a12-bfb3-4fe8-b9a5-48fd50a15a9a}
 
 Var DPINST_ARGS_RUNTIME
 
-!define DRIVER_NAME osvr_cdc
+!define CDC_DRIVER_NAME osvr_cdc
 
 Section -CDC_INF
   Var /GLOBAL DPINST_RET
-  !define CDC_DIR $PLUGINSDIR\cdc
-  !define CDC_SRC_DIR ${REPO_ROOT}\CDC
+  !define INF_DIR $PLUGINSDIR\cdc
+  !define INF_SRC_DIR ${REPO_ROOT}\Inf
   InitPluginsDir
-  SetOutPath "${CDC_DIR}"
-  DetailPrint "Temporarily extracting driver inf and cat along with installation tool."
+  SetOutPath "${INF_DIR}"
+  DetailPrint "Temporarily extracting driver infs and cat along with installation tool."
 
-  ; CDC driver inf
-  File "${CDC_SRC_DIR}\${DRIVER_NAME}.inf"
-
-  ; Signed catalog file
-  File "${CDC_SRC_DIR}\${DRIVER_NAME}.cat"
+  ; CDC driver inf + signed catalog file
+  File "${INF_SRC_DIR}\${CDC_DRIVER_NAME}.inf"
+  File "${INF_SRC_DIR}\${CDC_DRIVER_NAME}.cat"
 
   ; DIFx/DPInst configuration file
-  File "${REPO_ROOT}\CDC-NSIS-Installer\dpinst.xml"
+  File "${REPO_ROOT}\Inf-NSIS-Installer\dpinst.xml"
 
   File /oname=installer.ico "${INSTALLER_ICON}"
 
@@ -72,9 +70,9 @@ Section -CDC_INF
   ${Else}
     DetailPrint "Running 'DPInst' driver installation tool."
     ${If} ${RunningX64}
-      ExecWait '"${CDC_DIR}\dpinst64.exe" $DPINST_ARGS_RUNTIME /PATH "${CDC_DIR}"' $DPINST_RET
+      ExecWait '"${INF_DIR}\dpinst64.exe" $DPINST_ARGS_RUNTIME /PATH "${INF_DIR}"' $DPINST_RET
     ${Else}
-      ExecWait '"${CDC_DIR}\dpinst32.exe" $DPINST_ARGS_RUNTIME /PATH "${CDC_DIR}"' $DPINST_RET
+      ExecWait '"${INF_DIR}\dpinst32.exe" $DPINST_ARGS_RUNTIME /PATH "${INF_DIR}"' $DPINST_RET
     ${EndIf}
 
 
@@ -95,7 +93,7 @@ Section -CDC_INF
   DetailPrint "Cleaning up temporary files."
 
   SetOutPath $TEMP
-  RMDir /r "${CDC_DIR}"
+  RMDir /r "${INF_DIR}"
 
   ;SetOutPath $TEMP
   ;RMDir /r $INSTDIR
