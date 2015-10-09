@@ -59,6 +59,6 @@ ShowInstDetails show
 
 ; MUI end ------
 
-!include "${REPO_ROOT}\Inf-NSIS-Installer\cdc-driver-installer-common.nsh"
+!include "${REPO_ROOT}\Inf-NSIS-Installer\inf-driver-installer-common.nsh"
 
 !include "${REPO_ROOT}\Metadata\DeviceMetadataSection.nsh"
