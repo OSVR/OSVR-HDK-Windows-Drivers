@@ -1,0 +1,100 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; OSVR IR Tracking Camera Inf
+;
+; Part of OSVR
+; Authored by Sensics, Inc. <http://sensics.com/osvr>
+;
+; Copyright 2015 Sensics, Inc.
+;
+; Licensed under the Apache License, Version 2.0 (the "License");
+; you may not use this file except in compliance with the License.
+; You may obtain a copy of the License at
+;
+; 	http://www.apache.org/licenses/LICENSE-2.0
+;
+; Unless required by applicable law or agreed to in writing, software
+; distributed under the License is distributed on an "AS IS" BASIS,
+; WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+; See the License for the specific language governing permissions and
+; limitations under the License.
+
+[Version]
+Signature="$Windows NT$"
+Class       = Image
+ClassGuid   = {6bdd1fc6-810f-11d0-bec7-08002be2092f}
+
+Provider    = %Manufacturer%
+CatalogFile = %filename%.cat
+
+; using a high major version here for the same logic as in the HID inf.
+DriverVer=10/09/2015,7.1.2.3
+DriverPackageType=PlugAndPlay
+DriverPackageDisplayName = %PackageDisplayName%
+
+[ControlFlags]
+ExcludeFromSelect=* ; Only auto-matching-install is fine, just a "naming" driver.
+
+[Manufacturer]
+%Manufacturer% = OSVRMfg, NTx86, NTamd64, NTia64, NTarm
+
+;;;;;;;;;;;;;;;;;;;
+; "Models" sections
+
+; all architectures
+[OSVRMfg.NT]
+%OSVR_IR_CAM%=OSVR_IR_CAM,USB\VID_0BDA&PID_57E8&MI_00
+
+[OSVRMfg.NTx86]
+%OSVR_IR_CAM%=OSVR_IR_CAM,USB\VID_0BDA&PID_57E8&MI_00
+
+[OSVRMfg.NTia64]
+%OSVR_IR_CAM%=OSVR_IR_CAM,USB\VID_0BDA&PID_57E8&MI_00
+
+[OSVRMfg.NTamd64]
+%OSVR_IR_CAM%=OSVR_IR_CAM,USB\VID_0BDA&PID_57E8&MI_00
+
+[OSVRMfg.NTarm]
+%OSVR_IR_CAM%=OSVR_IR_CAM,USB\VID_0BDA&PID_57E8&MI_00
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; "DDInstall" and related sections for the IR camera
+; Sadly, because "nested Needs directives" don't work,
+; we must repeat more of this section from usbvideo.inf
+; than I'd prefer.
+[OSVR_IR_CAM.NT]
+; Just delegate as the standard driver does
+Include=usbvideo.inf, ks.inf, kscaptur.inf
+Needs=KS.Registration, KSCAPTUR.Registration.NT
+CopyFiles=USBVideo.CopyList
+AddReg=USBVideo.AddReg, TopologyNodeRegistration, DVCR.Plugins
+; Skipping AddProperty since that just says "Generic Driver Installed"
+
+[OSVR_IR_CAM.NT.HW]
+; Just delegate as the standard driver does
+Include=machine.inf
+Needs=PciD3ColdSupported
+
+[OSVR_IR_CAM.NT.CoInstallers]
+Include=usbvideo.inf
+Needs=USBVideo.NT.CoInstallers
+
+[OSVR_IR_CAM.NT.Interfaces]
+Include=usbvideo.inf
+Needs=USBVideo.NT.Interfaces
+
+[OSVR_IR_CAM.Interfaces]
+Include=usbvideo.inf
+Needs=USBVideo.Interfaces
+
+[OSVR_IR_CAM.NT.Services]
+Include=usbvideo.inf
+Needs=USBVideo.NT.Services
+
+;;;;;;;;;;;;;;;;;;;;;;;;;
+; Strings (and constants)
+
+[Strings]
+Manufacturer = "Sensics, Inc."
+PackageDisplayName = "OSVR IR Tracking Camera Drivers"
+FILENAME = "osvr_hdk_ircam"
+OSVR_IR_CAM = "OSVR High-Speed Infrared Tracking Camera"
