@@ -51,28 +51,53 @@ ExcludeFromSelect=* ; Only auto-matching-install is fine, just a "naming" driver
 
 ; all architectures
 [OSVRMfg.NT]
-%OSVR_HDK_HID%=OSVR_HDK_HID, HID\VID_1532&PID_0B00&MI_02
+%OSVR_HDK_HID_USB%=OSVR_HDK_HID_USB,USB\VID_1532&PID_0B00&REV_0100&MI_02
+%OSVR_HDK_HID_RAW%=OSVR_HDK_HID_RAW,HID\VID_1532&PID_0B00&REV_0100&MI_02
 
 [OSVRMfg.NTx86]
-%OSVR_HDK_HID%=OSVR_HDK_HID, HID\VID_1532&PID_0B00&MI_02
+%OSVR_HDK_HID_USB%=OSVR_HDK_HID_USB,USB\VID_1532&PID_0B00&REV_0100&MI_02
+%OSVR_HDK_HID_RAW%=OSVR_HDK_HID_RAW,HID\VID_1532&PID_0B00&REV_0100&MI_02
 
 [OSVRMfg.NTia64]
-%OSVR_HDK_HID%=OSVR_HDK_HID, HID\VID_1532&PID_0B00&MI_02
+%OSVR_HDK_HID_USB%=OSVR_HDK_HID_USB,USB\VID_1532&PID_0B00&REV_0100&MI_02
+%OSVR_HDK_HID_RAW%=OSVR_HDK_HID_RAW,HID\VID_1532&PID_0B00&REV_0100&MI_02
 
 [OSVRMfg.NTamd64]
-%OSVR_HDK_HID%=OSVR_HDK_HID, HID\VID_1532&PID_0B00&MI_02
+%OSVR_HDK_HID_USB%=OSVR_HDK_HID_USB,USB\VID_1532&PID_0B00&REV_0100&MI_02
+%OSVR_HDK_HID_RAW%=OSVR_HDK_HID_RAW,HID\VID_1532&PID_0B00&REV_0100&MI_02
 
 [OSVRMfg.NTarm]
-%OSVR_HDK_HID%=OSVR_HDK_HID, HID\VID_1532&PID_0B00&MI_02
+%OSVR_HDK_HID_USB%=OSVR_HDK_HID_USB,USB\VID_1532&PID_0B00&REV_0100&MI_02
+%OSVR_HDK_HID_RAW%=OSVR_HDK_HID_RAW,HID\VID_1532&PID_0B00&REV_0100&MI_02
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; "DDInstall" and related sections
-[OSVR_HDK_HID.NT]
+; "DDInstall" and related sections for:
+; USB\VID_vvvv&PID_dddd&REV_rrrr&MI_ii parent device to the HID\ device
+[OSVR_HDK_HID_USB.NT]
 ; Just delegate to the standard driver
-; Skipping the plain DDInstall section because we don't
-; want the generic device property.
+; Not using "Needs" here to avoid the generic driver property.
+Include=input.inf
+Copyfiles=HID_Inst.CopyFiles.NT
 
-[OSVR_HDK_HID.NT.Services]
+[OSVR_HDK_HID_USB.NT.HW]
+; Just delegate to the standard driver
+Include=input.inf
+Needs=HID_Inst.NT.HW
+
+[OSVR_HDK_HID_USB.NT.Services]
+; Just delegate to the standard driver
+Include=input.inf
+Needs=HID_Inst.NT.Services
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; "DDInstall" and related sections for:
+; HID\VID_vvvv&PID_dddd&REV_rrrr&MI_ii child device
+[OSVR_HDK_HID_RAW.NT]
+; We'd just delegate to the standard driver, but
+; not using "Needs" here to avoid the generic driver property,
+; so leaving this section empty.
+
+[OSVR_HDK_HID_RAW.NT.Services]
 ; Just delegate to the standard driver
 Include=input.inf
 Needs=HID_Raw_Inst.NT.Services
@@ -82,6 +107,7 @@ Needs=HID_Raw_Inst.NT.Services
 
 [Strings]
 Manufacturer = "Sensics, Inc."
-PackageDisplayName = "OSVR HDK HID Driver"
-OSVR_HDK_HID = "OSVR HDK Orientation Tracker"
+PackageDisplayName = "OSVR HDK HID Drivers"
 FILENAME = "osvr_hdk_hid"
+OSVR_HDK_HID_USB = "OSVR HDK USB HID Interface"
+OSVR_HDK_HID_RAW = "OSVR HDK Orientation Tracker"
