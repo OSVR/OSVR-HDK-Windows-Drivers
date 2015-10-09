@@ -33,6 +33,7 @@ Var DPINST_ARGS_RUNTIME
 
 !define CDC_DRIVER_NAME osvr_cdc
 !define DISPLAY_DRIVER_NAME osvr_hdk_display
+!define HID_DRIVER_NAME osvr_hdk_hid
 
 Section -CDC_INF
   Var /GLOBAL DPINST_RET
@@ -57,6 +58,11 @@ Section -CDC_INF
   DetailPrint "Display interface driver:"
   File "${INF_SRC_DIR}\${DISPLAY_DRIVER_NAME}.inf"
   File "${INF_SRC_DIR}\${DISPLAY_DRIVER_NAME}.cat"
+
+  ; Nearly-dummy HID driver inf + signed catalog file
+  DetailPrint "Display interface driver:"
+  File "${INF_SRC_DIR}\${HID_DRIVER_NAME}.inf"
+  File "${INF_SRC_DIR}\${HID_DRIVER_NAME}.cat"
 
   DetailPrint "Driver installer support files:"
   ; DIFx/DPInst configuration file
