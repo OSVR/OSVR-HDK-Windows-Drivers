@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <DeviceInfo xmlns="http://schemas.microsoft.com/windows/DeviceMetadata/DeviceInfo/2007/11/">
   <DeviceCategoryList>
-    <DeviceCategory>Display</DeviceCategory>
+    <!--<DeviceCategory>Display</DeviceCategory> -->
     <DeviceCategory>Sensor.Orientation</DeviceCategory>
   </DeviceCategoryList>
   <ModelName>OSVR HDK</ModelName>
   <DeviceDescription1>Hacker Development Kit head-mounted display </DeviceDescription1>
-  <DeviceDescription2>Display, IMU tracker, and control interface.</DeviceDescription2>
+  <DeviceDescription2>IMU tracker and control interface.</DeviceDescription2>
   <ModelNumber>OSVR HDK v1.x</ModelNumber>
   <Manufacturer>Razer and Sensics, Inc.</Manufacturer>
   <DeviceIconFile>HDK.ico</DeviceIconFile>

@@ -2,7 +2,8 @@
 <PackageInfo xmlns="http://schemas.microsoft.com/windows/DeviceMetadata/PackageInfo/2007/11/">
   <MetadataKey>
     <HardwareIDList>
-      <HardwareID>DOID:MONITOR\SVR1019</HardwareID>
+      <!-- Commented out the hardware ID for the monitor until we can fuse the containers. -->
+      <!--<HardwareID>DOID:MONITOR\SVR1019</HardwareID>-->
       <HardwareID>DOID:USB\VID_1532&amp;PID_0B00&amp;REV_0100</HardwareID>
     </HardwareIDList>
     <Locale default="true">en</Locale>

@@ -17,26 +17,38 @@
 ; See the License for the specific language governing permissions and
 ; limitations under the License.
 
+!include LogicLib.nsh
+!include WinVer.nsh
 
 !define METADATA_DIR $PLUGINSDIR\metadata
 
-!include psexec.nsh
-
 Section -DeviceMetadata
-  InitPluginsDir
-  SetOutPath "${METADATA_DIR}"
-  ; PowerShell install script
-  File "${REPO_ROOT}\Metadata\MetadataInstallScript\install-metadata.ps1"
+  ${If} ${AtLeastWin7}
+    InitPluginsDir
+    SetOutPath "${METADATA_DIR}"
 
-  ; Metadata Files
-  File "${REPO_ROOT}\Metadata\Output\HMDOnly\*.devicemetadata-ms"
-  File "${REPO_ROOT}\Metadata\Output\BeltBox\*.devicemetadata-ms"
-  File "${REPO_ROOT}\Metadata\Output\TrackingCamera\*.devicemetadata-ms"
+    ; C# install tool
+    DetailPrint "Device metadata install tool:"
+    File "${REPO_ROOT}\Metadata\MetadataInstallTool\DeviceMetadataInstallTool.exe"
+    File "${REPO_ROOT}\Metadata\MetadataInstallTool\DeviceMetadataInstallTool.exe.config"
+    File "${REPO_ROOT}\Metadata\MetadataInstallTool\Sensics.*.dll"
 
-  ;ExecWait "PowerShell.exe -NoProfile -NoLogo -ExecutionPolicy Bypass -Command '${METADATA_DIR}\install-metadata.ps1'"
-  ${PowerShellExecFileLog} "${METADATA_DIR}\install-metadata.ps1"
+    ; Metadata Files
+    DetailPrint "Device metadata packages:"
+    File "${REPO_ROOT}\Metadata\Output\HMDDisplay\*.devicemetadata-ms"
+    File "${REPO_ROOT}\Metadata\Output\HMDOnly\*.devicemetadata-ms"
+    File "${REPO_ROOT}\Metadata\Output\BeltBox\*.devicemetadata-ms"
+    File "${REPO_ROOT}\Metadata\Output\TrackingCamera\*.devicemetadata-ms"
 
-  SetOutPath $TEMP
-  RMDir /r "${METADATA_DIR}"
-  SetErrorLevel 0
+    ; Run the metadata installer.
+    DetailPrint "Running device metadata install tool"
+    nsExec::ExecToLog '"${METADATA_DIR}\DeviceMetadataInstallTool.exe" "${METADATA_DIR}"'
+    Pop $0
+
+    SetOutPath $TEMP
+    RMDir /r "${METADATA_DIR}"
+    SetErrorLevel 0
+  ${Else}
+    DetailPrint "Device Metadata is only usable on Windows 7 and newer."
+  ${EndIf}
 SectionEnd

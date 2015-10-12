@@ -149,6 +149,7 @@ def process_dir(dirname):
     metadata.generate()
     metadata.pack_cab_into(staging_dir)
 
+process_dir("HMDDisplay")
 process_dir("HMDOnly")
 process_dir("BeltBox")
 process_dir("TrackingCamera")
