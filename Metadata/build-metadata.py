@@ -20,10 +20,10 @@ def path_join(a, b):
 class CabinetFile:
     def __init__(self):
         from jinja2 import Template
-        with open("template.ddf", 'rb') as f:
+        with open("ddf-templates/template.ddf", 'rb') as f:
             self.overall_template = Template(f.read().decode('utf-8'))
 
-        with open("ddfdirtemplate.ddf", 'rb') as f:
+        with open("ddf-templates/dirtemplate", 'rb') as f:
             self.dir_template = Template(f.read().decode('utf-8'))
         self.dir_template.globals['path_join'] = path_join
         self.dirs = []
