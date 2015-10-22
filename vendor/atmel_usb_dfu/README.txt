@@ -1,0 +1,1 @@
+atmel_usb_dfu driver: Extracted from Flip Installer - 3.4.7.112, distributed under the GPL (libusb0)

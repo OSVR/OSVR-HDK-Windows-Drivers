@@ -49,3 +49,5 @@ No uninstaller for the device metadata because it's tiny, harmless, and installe
 ## License and Vendored Projects
 
 This project: Licensed under the Apache License, Version 2.0.
+
+- `/vendor/atmel_usb_dfu` - Atmel USB DFU drivers (based on libusb-win32 1.2.2.0) - under the GPL or LGPL (their documentation conflicts)
