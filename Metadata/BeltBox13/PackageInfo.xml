@@ -3,6 +3,7 @@
   <MetadataKey>
     <HardwareIDList>
       <HardwareID>DOID:USB\VID_0572&amp;PID_1806&amp;REV_9300</HardwareID>
+      <HardwareID>DOID:HID\VID_0572&amp;PID_1806&amp;REV_9300&amp;MI_03</HardwareID>
     </HardwareIDList>
     <Locale default="true">en</Locale>
     <LastModifiedDate>{{ last_modified }}</LastModifiedDate>
