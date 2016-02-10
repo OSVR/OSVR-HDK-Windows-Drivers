@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PackageInfo xmlns="http://schemas.microsoft.com/windows/DeviceMetadata/PackageInfo/2007/11/">
+  <MetadataKey>
+    <HardwareIDList>
+      <HardwareID>DOID:USB\VID_0BDA&amp;PID_57E8&amp;REV_0005&amp;MI_00</HardwareID> <!-- some early shipping versions - sync issues -->
+      <HardwareID>DOID:USB\VID_0BDA&amp;PID_57E8&amp;REV_0006&amp;MI_00</HardwareID> <!-- error in UVC descriptor -->
+    </HardwareIDList>
+    <Locale default="true">en</Locale>
+    <LastModifiedDate>{{ last_modified }}</LastModifiedDate>
+    <MultipleLocale xmlns="http://schemas.microsoft.com/windows/2010/08/DeviceMetadata/PackageInfov2">true</MultipleLocale>
+  </MetadataKey>
+  <PackageStructure>
+    <Metadata MetadataID="http://schemas.microsoft.com/windows/DeviceMetadata/DeviceInfo/2007/11/">DeviceInfo</Metadata>
+    <Metadata MetadataID="http://schemas.microsoft.com/windows/DeviceMetadata/WindowsInfo/2007/11/">WindowsInfo</Metadata>
+    <Metadata MetadataID="http://schemas.microsoft.com/windows/DeviceMetadata/PackageInfo/2007/11/">PackageInfo.xml</Metadata>
+  </PackageStructure>
+  <Relationships>
+    <ExperienceID>{{ experience_guid }}</ExperienceID>
+  </Relationships>
+  <MetadataBuilderInformation>
+    <Application>Microsoft Device Metadata Package Authoring Tool</Application>
+    <Version>10.0.10240.16384</Version>
+  </MetadataBuilderInformation>
+</PackageInfo>
