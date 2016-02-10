@@ -13,6 +13,8 @@ Most of the scripts here require the Windows Driver Kit - version 10 is the defa
 
 The executable installers require NSIS 3 (in beta last time I updated this).
 
+To make a zip file of the infs automatically with `make-zip`, you'll need the 7-zip command line tools installed (I used [Chocolatey](http://chocolatey.org) to install it) such that you can run `7za` in a command prompt and have something useful happen.
+
 To fully enjoy these files, especially on Windows 8 and newer, you'll need a code-signing certificate (self-signed if you're using them on a test-signing-mode machine). Microsoft makes the rules for signed drivers, sorry.
 
 ## Directories and Output Files
