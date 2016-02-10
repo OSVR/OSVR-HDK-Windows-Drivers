@@ -42,18 +42,23 @@ ExcludeFromSelect=* ; Only auto-matching-install is fine, just a "naming" driver
 
 ; all architectures
 [OSVRMfg.NT]
+%OSVR_IR_CAM_V5%=OSVR_IR_CAM,USB\VID_0BDA&PID_57E8&REV_0005&MI_00
 %OSVR_IR_CAM%=OSVR_IR_CAM,USB\VID_0BDA&PID_57E8&MI_00
 
 [OSVRMfg.NTx86]
+%OSVR_IR_CAM_V5%=OSVR_IR_CAM,USB\VID_0BDA&PID_57E8&REV_0005&MI_00
 %OSVR_IR_CAM%=OSVR_IR_CAM,USB\VID_0BDA&PID_57E8&MI_00
 
 [OSVRMfg.NTia64]
+%OSVR_IR_CAM_V5%=OSVR_IR_CAM,USB\VID_0BDA&PID_57E8&REV_0005&MI_00
 %OSVR_IR_CAM%=OSVR_IR_CAM,USB\VID_0BDA&PID_57E8&MI_00
 
 [OSVRMfg.NTamd64]
+%OSVR_IR_CAM_V5%=OSVR_IR_CAM,USB\VID_0BDA&PID_57E8&REV_0005&MI_00
 %OSVR_IR_CAM%=OSVR_IR_CAM,USB\VID_0BDA&PID_57E8&MI_00
 
 [OSVRMfg.NTarm]
+%OSVR_IR_CAM_V5%=OSVR_IR_CAM,USB\VID_0BDA&PID_57E8&REV_0005&MI_00
 %OSVR_IR_CAM%=OSVR_IR_CAM,USB\VID_0BDA&PID_57E8&MI_00
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -97,4 +102,5 @@ Needs=USBVideo.NT.Services
 Manufacturer = "Sensics, Inc."
 PackageDisplayName = "OSVR IR Tracking Camera Drivers"
 FILENAME = "osvr_hdk_ircam"
+OSVR_IR_CAM_V5 = "OSVR High-Speed Infrared Tracking Camera (FIRMWARE UPGRADE REQUIRED!)"
 OSVR_IR_CAM = "OSVR High-Speed Infrared Tracking Camera"
