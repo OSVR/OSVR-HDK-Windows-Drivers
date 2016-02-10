@@ -169,5 +169,6 @@ def process_dir(dirname):
 
 process_dir("HMDDisplay")
 process_dir("HMDOnly")
-process_dir("BeltBox")
+process_dir("BeltBox12")
+process_dir("BeltBox13")
 process_dir("TrackingCamera")

@@ -37,7 +37,8 @@ Section -DeviceMetadata
     DetailPrint "Device metadata packages:"
     File "${REPO_ROOT}\Metadata\Output\HMDDisplay\*.devicemetadata-ms"
     File "${REPO_ROOT}\Metadata\Output\HMDOnly\*.devicemetadata-ms"
-    File "${REPO_ROOT}\Metadata\Output\BeltBox\*.devicemetadata-ms"
+    File "${REPO_ROOT}\Metadata\Output\BeltBox12\*.devicemetadata-ms"
+    File "${REPO_ROOT}\Metadata\Output\BeltBox13\*.devicemetadata-ms"
     File "${REPO_ROOT}\Metadata\Output\TrackingCamera\*.devicemetadata-ms"
 
     ; Run the metadata installer.
