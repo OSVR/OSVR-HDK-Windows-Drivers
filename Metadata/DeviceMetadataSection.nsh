@@ -22,6 +22,8 @@
 
 !define METADATA_DIR $PLUGINSDIR\metadata
 
+!define FIRMWARE_URL http://osvr.github.io/using/
+
 Section -DeviceMetadata
   ${If} ${AtLeastWin7}
     InitPluginsDir
@@ -50,6 +52,16 @@ Section -DeviceMetadata
     SetOutPath $TEMP
     RMDir /r "${METADATA_DIR}"
     SetErrorLevel 0
+
+    DetailPrint "Adding device metadata static context menu items"
+
+    ; v5
+    WriteRegExpandStr HKCR "DeviceDisplayObject\HardwareId\USB#VID_0BDA&PID_57E8&REV_0005\Shell\FirmwareUpgrade" "MUIVerb" "Get firmware upgrade..."
+    WriteRegStr HKCR "DeviceDisplayObject\HardwareId\USB#VID_0BDA&PID_57E8&REV_0005\Shell\FirmwareUpgrade\Command" "" "rundll32.exe url.dll,FileProtocolHandler ${FIRMWARE_URL}"
+
+    ; v6
+    WriteRegExpandStr HKCR "DeviceDisplayObject\HardwareId\USB#VID_0BDA&PID_57E8&REV_0006\Shell\FirmwareUpgrade" "MUIVerb" "Get firmware upgrade..."
+    WriteRegStr HKCR "DeviceDisplayObject\HardwareId\USB#VID_0BDA&PID_57E8&REV_0006\Shell\FirmwareUpgrade\Command" "" "rundll32.exe url.dll,FileProtocolHandler ${FIRMWARE_URL}"
   ${Else}
     DetailPrint "Device Metadata is only usable on Windows 7 and newer."
   ${EndIf}
