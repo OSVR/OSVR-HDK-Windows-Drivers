@@ -47,16 +47,10 @@ Section -CDC_INF
   SetOutPath "${INF_DIR}"
   DetailPrint "Temporarily extracting driver infs and cat along with installation tool."
 
-  ${If} ${AtLeastWin10}
-    DetailPrint "Windows 10 does not need USB-CDC driver installed."
-    SetDetailsView show
-    SetAutoClose false
-  ${Else}
   ; CDC driver inf + signed catalog file
-    DetailPrint "USB-CDC driver:"
-    File "${INF_SRC_DIR}\${CDC_DRIVER_NAME}.inf"
-    File "${INF_SRC_DIR}\${CDC_DRIVER_NAME}.cat"
-  ${EndIf}
+  DetailPrint "USB-CDC driver:"
+  File "${INF_SRC_DIR}\${CDC_DRIVER_NAME}.inf"
+  File "${INF_SRC_DIR}\${CDC_DRIVER_NAME}.cat"
 
   ; Nearly-dummy display driver inf + signed catalog file
   DetailPrint "Display interface driver:"
