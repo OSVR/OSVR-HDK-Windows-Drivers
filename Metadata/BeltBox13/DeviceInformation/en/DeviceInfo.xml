@@ -5,10 +5,10 @@
     <DeviceCategory>Audio.Adapter</DeviceCategory>
     <DeviceCategory>Audio.Microphone</DeviceCategory>
   </DeviceCategoryList>
-  <ModelName>OSVR HDK 1.3 Belt Box/Audio</ModelName>
+  <ModelName>OSVR HDK 1.3/1.4 Belt Box/Audio</ModelName>
   <DeviceDescription1>Headset jack on HDK belt box.</DeviceDescription1>
   <DeviceDescription2>Belt box also includes accessible USB3 port.</DeviceDescription2>
-  <ModelNumber>OSVR HDK v1.3 Belt Box</ModelNumber>
+  <ModelNumber>OSVR HDK v1.3/1.4 Belt Box</ModelNumber>
   <Manufacturer>Razer (Asia-Pacific) Pte Ltd.</Manufacturer>
   <DeviceIconFile>HDK-Beltbox.ico</DeviceIconFile>
 </DeviceInfo>
