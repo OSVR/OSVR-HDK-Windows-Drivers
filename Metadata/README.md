@@ -5,9 +5,9 @@ See <https://github.com/OSVR/OSVR-HDK-Windows-Drivers/wiki/MS-Device-Metadata> f
 ## Files and directories
 
 ### Main build process and its input/output
-Requires Python 2.x and the Jinja2 Python package. Also needs the `makecab.exe` tool, bundled with windows, so it's easiest to run this all on Windows.
+Requires Python 2.x and the Jinja2 Python package (try `pip install -r requirements.txt` to get that installed). Also needs the `makecab.exe` tool, bundled with windows, so it's easiest to run this all on Windows.
 
-- `build-metadata.cmd` - cleans up output from any previous builds then runs `build-metadata.py`
+- `build-metadata.cmd` - cleans up output from any previous builds then runs `build-metadata.py`. **This is the main/only script to run in this directory if you're building a combined installer.**
 - `build-metadata.py` - "Compiles" the device metadata source directories into device metadata package files. See below for details on what specifically it does.
 - `ddf-templates/` - Jinja2 templates used by `build-metadata.py` to create the `.ddf` file that describes to `makecab` exactly what we want constructed for each metadata package.
 - Metadata package source directories:
