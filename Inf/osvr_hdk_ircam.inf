@@ -74,6 +74,11 @@ AddReg=USBVideo.AddReg, TopologyNodeRegistration, DVCR.Plugins
 Include=machine.inf
 Needs=PciD3ColdSupported
 
+[OSVR_IR_CAM.NT.10.HW]
+; Just delegate as the standard driver does on Windows 10
+Include=pci.inf
+Needs=PciD3ColdSupported.HW
+
 [OSVR_IR_CAM.NT.CoInstallers]
 Include=usbvideo.inf
 Needs=USBVideo.NT.CoInstallers
