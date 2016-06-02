@@ -36,7 +36,7 @@ CatalogFile = %filename%.cat
 ; Per https://msdn.microsoft.com/en-us/library/windows/hardware/jj131716(v=vs.85).aspx,
 ; version must exceed that of input.inf
 ; which was 6.3.9600.17041 in Win8.1
-DriverVer=02/10/2016,10.1.2.6
+DriverVer=06/02/2016,10.1.2.7
 DriverPackageType=PlugAndPlay
 DriverPackageDisplayName = %PackageDisplayName%
 

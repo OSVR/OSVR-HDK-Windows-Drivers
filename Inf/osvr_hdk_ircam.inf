@@ -27,7 +27,7 @@ Provider    = %Manufacturer%
 CatalogFile = %filename%.cat
 
 ; using a high major version here for the same logic as in the HID inf.
-DriverVer=02/10/2016,10.1.2.6
+DriverVer=06/02/2016,10.1.2.7
 DriverPackageType=PlugAndPlay
 DriverPackageDisplayName = %PackageDisplayName%
 
