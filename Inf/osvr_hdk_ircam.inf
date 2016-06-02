@@ -69,6 +69,10 @@ CopyFiles=USBVideo.CopyList
 AddReg=USBVideo.AddReg, TopologyNodeRegistration, DVCR.Plugins
 ; Skipping AddProperty since that just says "Generic Driver Installed"
 
+; In this case, the non-generic device name is just "USB Camera" - which is quite generic -
+; so we actually do want our own supplied name to override it.
+PreferDeviceInfo=0
+
 [OSVR_IR_CAM.NT.HW]
 ; Just delegate as the standard driver does
 Include=machine.inf
