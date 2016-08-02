@@ -4,7 +4,7 @@
 ; Part of OSVR
 ; Authored by Sensics, Inc. <http://sensics.com/osvr>
 ;
-; Copyright 2015 Sensics, Inc.
+; Copyright 2015-2016 Sensics, Inc.
 ;
 ; Licensed under the Apache License, Version 2.0 (the "License");
 ; you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@ Provider    = %Manufacturer%
 CatalogFile = %filename%.cat
 
 ; using a high major version here for the same logic as in the HID inf.
-DriverVer=06/02/2016,10.1.2.7
+DriverVer=08/02/2016,10.1.2.8
 DriverPackageType=PlugAndPlay
 DriverPackageDisplayName = %PackageDisplayName%
 
@@ -35,33 +35,49 @@ DriverPackageDisplayName = %PackageDisplayName%
 ExcludeFromSelect=* ; Only auto-matching-install is fine, just a "naming" driver.
 
 [Manufacturer]
-%Manufacturer% = OSVRMfg, NTx86, NTamd64, NTia64, NTarm
+%Manufacturer% = OSVRMfg, NTamd64, NTia64, NTarm, 10, NTamd64.10, NTarm.10
 
 ;;;;;;;;;;;;;;;;;;;
 ; "Models" sections
 
 ; all architectures
-[OSVRMfg.NT]
-%OSVR_IR_CAM%=OSVR_IR_CAM,USB\VID_0BDA&PID_57E8&MI_00
-
-[OSVRMfg.NTx86]
-%OSVR_IR_CAM%=OSVR_IR_CAM,USB\VID_0BDA&PID_57E8&MI_00
+[OSVRMfg]
+%OSVR_IR_CAM%=OSVR_IR_CAM_PRE10,USB\VID_0BDA&PID_57E8&MI_00
 
 [OSVRMfg.NTia64]
-%OSVR_IR_CAM%=OSVR_IR_CAM,USB\VID_0BDA&PID_57E8&MI_00
+%OSVR_IR_CAM%=OSVR_IR_CAM_PRE10,USB\VID_0BDA&PID_57E8&MI_00
 
 [OSVRMfg.NTamd64]
-%OSVR_IR_CAM%=OSVR_IR_CAM,USB\VID_0BDA&PID_57E8&MI_00
+%OSVR_IR_CAM%=OSVR_IR_CAM_PRE10,USB\VID_0BDA&PID_57E8&MI_00
 
 [OSVRMfg.NTarm]
-%OSVR_IR_CAM%=OSVR_IR_CAM,USB\VID_0BDA&PID_57E8&MI_00
+%OSVR_IR_CAM%=OSVR_IR_CAM_PRE10,USB\VID_0BDA&PID_57E8&MI_00
+
+; all architectures, WIndows 10
+[OSVRMfg.10]
+%OSVR_IR_CAM%=OSVR_IR_CAM_10,USB\VID_0BDA&PID_57E8&MI_00
+
+[OSVRMfg.NTamd64.10]
+%OSVR_IR_CAM%=OSVR_IR_CAM_10,USB\VID_0BDA&PID_57E8&MI_00
+
+[OSVRMfg.NTarm.10]
+%OSVR_IR_CAM%=OSVR_IR_CAM_10,USB\VID_0BDA&PID_57E8&MI_00
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; "DDInstall" and related sections for the IR camera
 ; Sadly, because "nested Needs directives" don't work,
 ; we must repeat more of this section from usbvideo.inf
 ; than I'd prefer.
-[OSVR_IR_CAM.NT]
+
+[OSVR_IR_CAM_PRE10]
+; Just delegate as the standard driver does
+Include=usbvideo.inf, ks.inf, kscaptur.inf
+Needs=KS.Registration, KSCAPTUR.Registration.NT
+CopyFiles=USBVideo.CopyList
+AddReg=USBVideo.AddReg, TopologyNodeRegistration, DVCR.Plugins
+; Skipping AddProperty since that just says "Generic Driver Installed"
+
+[OSVR_IR_CAM_10]
 ; Just delegate as the standard driver does
 Include=usbvideo.inf, ks.inf, kscaptur.inf
 Needs=KS.Registration, KSCAPTUR.Registration.NT
@@ -73,29 +89,37 @@ AddReg=USBVideo.AddReg, TopologyNodeRegistration, DVCR.Plugins
 ; so we actually do want our own supplied name to override it.
 PreferDeviceInfo=0
 
-[OSVR_IR_CAM.NT.HW]
+[OSVR_IR_CAM_PRE10.HW]
 ; Just delegate as the standard driver does
 Include=machine.inf
 Needs=PciD3ColdSupported
 
-[OSVR_IR_CAM.NT.10.HW]
+[OSVR_IR_CAM_10.HW]
 ; Just delegate as the standard driver does on Windows 10
 Include=pci.inf
 Needs=PciD3ColdSupported.HW
 
-[OSVR_IR_CAM.NT.CoInstallers]
+[OSVR_IR_CAM_PRE10.CoInstallers]
 Include=usbvideo.inf
 Needs=USBVideo.NT.CoInstallers
 
-[OSVR_IR_CAM.NT.Interfaces]
+[OSVR_IR_CAM_10.CoInstallers]
+Include=usbvideo.inf
+Needs=USBVideo.NT.CoInstallers
+
+[OSVR_IR_CAM_PRE10.Interfaces]
 Include=usbvideo.inf
 Needs=USBVideo.NT.Interfaces
 
-[OSVR_IR_CAM.Interfaces]
+[OSVR_IR_CAM_10.Interfaces]
 Include=usbvideo.inf
-Needs=USBVideo.Interfaces
+Needs=USBVideo.NT.Interfaces
 
-[OSVR_IR_CAM.NT.Services]
+[OSVR_IR_CAM_PRE10.Services]
+Include=usbvideo.inf
+Needs=USBVideo.NT.Services
+
+[OSVR_IR_CAM_10.Services]
 Include=usbvideo.inf
 Needs=USBVideo.NT.Services
 
