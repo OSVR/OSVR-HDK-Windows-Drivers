@@ -4,7 +4,7 @@
 ; Part of OSVR
 ; Authored by Sensics, Inc. <http://sensics.com/osvr>
 ;
-; Copyright 2015 Sensics, Inc.
+; Copyright 2015-2016 Sensics, Inc.
 ;
 ; Licensed under the Apache License, Version 2.0 (the "License");
 ; you may not use this file except in compliance with the License.
@@ -33,7 +33,7 @@ CatalogFile = %filename%.cat
 ;CatalogFile.NTamd64 = %filename%_amd64.cat
 ;CatalogFile.NTarm = %filename%_arm.cat
 
-DriverVer=06/02/2016,1.1.2.7
+DriverVer=08/02/2016,1.1.2.8
 DriverPackageType=PlugAndPlay
 DriverPackageDisplayName = %PackageDisplayName%
 
@@ -41,44 +41,48 @@ DriverPackageDisplayName = %PackageDisplayName%
 ExcludeFromSelect=* ; Only auto-matching-install is fine, just a "naming" driver.
 
 [Manufacturer]
-%Manufacturer% = OSVRMfg, NTx86, NTamd64, NTia64, NTarm
+%Manufacturer% = OSVRMfg, NTamd64, NTia64, NTarm
 
 ;;;;;;;;;;;;;;;;;;;
 ; "Models" sections
 
 ; all architectures
-[OSVRMfg.NT]
-%OSVR_EARLY_HDK_DISPLAY%=OSVR_HDK_DISPLAY, MONITOR\SEN1019
-%OSVR_HDK_DISPLAY%=OSVR_HDK_DISPLAY, MONITOR\SVR1019
-
-[OSVRMfg.NTx86]
-%OSVR_EARLY_HDK_DISPLAY%=OSVR_HDK_DISPLAY, MONITOR\SEN1019
-%OSVR_HDK_DISPLAY%=OSVR_HDK_DISPLAY, MONITOR\SVR1019
+[OSVRMfg]
+%OSVR.SEN.1019.Desc%=OSVR_HDK1X_DISPLAY, MONITOR\SEN1019
+%OSVR.SVR.1019.Desc%=OSVR_HDK1X_DISPLAY, MONITOR\SVR1019
 
 [OSVRMfg.NTia64]
-%OSVR_EARLY_HDK_DISPLAY%=OSVR_HDK_DISPLAY, MONITOR\SEN1019
-%OSVR_HDK_DISPLAY%=OSVR_HDK_DISPLAY, MONITOR\SVR1019
+%OSVR.SEN.1019.Desc%=OSVR_HDK1X_DISPLAY, MONITOR\SEN1019
+%OSVR.SVR.1019.Desc%=OSVR_HDK1X_DISPLAY, MONITOR\SVR1019
 
 [OSVRMfg.NTamd64]
-%OSVR_EARLY_HDK_DISPLAY%=OSVR_HDK_DISPLAY, MONITOR\SEN1019
-%OSVR_HDK_DISPLAY%=OSVR_HDK_DISPLAY, MONITOR\SVR1019
+%OSVR.SEN.1019.Desc%=OSVR_HDK1X_DISPLAY, MONITOR\SEN1019
+%OSVR.SVR.1019.Desc%=OSVR_HDK1X_DISPLAY, MONITOR\SVR1019
 
 [OSVRMfg.NTarm]
-%OSVR_EARLY_HDK_DISPLAY%=OSVR_HDK_DISPLAY, MONITOR\SEN1019
-%OSVR_HDK_DISPLAY%=OSVR_HDK_DISPLAY, MONITOR\SVR1019
+%OSVR.SEN.1019.Desc%=OSVR_HDK1X_DISPLAY, MONITOR\SEN1019
+%OSVR.SVR.1019.Desc%=OSVR_HDK1X_DISPLAY, MONITOR\SVR1019
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; "DDInstall" and related sections
-[OSVR_HDK_DISPLAY.NT]
-; Don't actually need to do anything at this point since
-; we have nice, non-buggy EDID data
+[OSVR_HDK1X_DISPLAY]
+AddReg      = OSVR_HDK1X_DISPLAY.AddReg
+
+[OSVR_HDK1X_DISPLAY.AddReg]
+; Empty, dummy section to silence warnings.
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Strings (and constants)
 
 [Strings]
 Manufacturer = "Sensics, Inc."
+
 PackageDisplayName = "OSVR HDK Display Interface"
-OSVR_EARLY_HDK_DISPLAY = "OSVR HDK Head-Mounted Display (Early Firmware)"
-OSVR_HDK_DISPLAY = "OSVR HDK Head-Mounted Display"
+
+OSVR.SEN.1019.Desc = "OSVR HDK 1.x Head-Mounted Display (Early Firmware)"
+OSVR.SVR.1019.Desc = "OSVR HDK-Family Head-Mounted Display"
+
 FILENAME = "osvr_hdk_display"
+
+; constant - non-localizable
+REG_DWORD   = 0x10001
