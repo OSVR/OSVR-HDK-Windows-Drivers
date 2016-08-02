@@ -4,7 +4,7 @@
 ; Part of OSVR
 ; Authored by Sensics, Inc. <http://sensics.com/osvr>
 ;
-; Copyright 2015 Sensics, Inc.
+; Copyright 2015-2016 Sensics, Inc.
 ;
 ; Licensed under the Apache License, Version 2.0 (the "License");
 ; you may not use this file except in compliance with the License.
@@ -36,7 +36,7 @@ CatalogFile = %filename%.cat
 ; Per https://msdn.microsoft.com/en-us/library/windows/hardware/jj131716(v=vs.85).aspx,
 ; version must exceed that of input.inf
 ; which was 6.3.9600.17041 in Win8.1
-DriverVer=06/02/2016,10.1.2.7
+DriverVer=08/02/2016,10.1.2.8
 DriverPackageType=PlugAndPlay
 DriverPackageDisplayName = %PackageDisplayName%
 
@@ -44,17 +44,13 @@ DriverPackageDisplayName = %PackageDisplayName%
 ExcludeFromSelect=* ; Only auto-matching-install is fine, just a "naming" driver.
 
 [Manufacturer]
-%Manufacturer% = OSVRMfg, NTx86, NTamd64, NTia64, NTarm
+%Manufacturer% = OSVRMfg, NTamd64, NTia64, NTarm
 
 ;;;;;;;;;;;;;;;;;;;
 ; "Models" sections
 
 ; all architectures
-[OSVRMfg.NT]
-%OSVR_HDK_HID_USB%=OSVR_HDK_HID_USB,USB\VID_1532&PID_0B00&REV_0100&MI_02
-%OSVR_HDK_HID_RAW%=OSVR_HDK_HID_RAW,HID\VID_1532&PID_0B00&REV_0100&MI_02
-
-[OSVRMfg.NTx86]
+[OSVRMfg]
 %OSVR_HDK_HID_USB%=OSVR_HDK_HID_USB,USB\VID_1532&PID_0B00&REV_0100&MI_02
 %OSVR_HDK_HID_RAW%=OSVR_HDK_HID_RAW,HID\VID_1532&PID_0B00&REV_0100&MI_02
 
@@ -73,18 +69,18 @@ ExcludeFromSelect=* ; Only auto-matching-install is fine, just a "naming" driver
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; "DDInstall" and related sections for:
 ; USB\VID_vvvv&PID_dddd&REV_rrrr&MI_ii parent device to the HID\ device
-[OSVR_HDK_HID_USB.NT]
+[OSVR_HDK_HID_USB]
 ; Just delegate to the standard driver
 ; Not using "Needs" here to avoid the generic driver property.
 Include=input.inf
 Copyfiles=HID_Inst.CopyFiles.NT
 
-[OSVR_HDK_HID_USB.NT.HW]
+[OSVR_HDK_HID_USB.HW]
 ; Just delegate to the standard driver
 Include=input.inf
 Needs=HID_Inst.NT.HW
 
-[OSVR_HDK_HID_USB.NT.Services]
+[OSVR_HDK_HID_USB.Services]
 ; Just delegate to the standard driver
 Include=input.inf
 Needs=HID_Inst.NT.Services
@@ -92,12 +88,16 @@ Needs=HID_Inst.NT.Services
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; "DDInstall" and related sections for:
 ; HID\VID_vvvv&PID_dddd&REV_rrrr&MI_ii child device
-[OSVR_HDK_HID_RAW.NT]
+[OSVR_HDK_HID_RAW]
 ; We'd just delegate to the standard driver, but
 ; not using "Needs" here to avoid the generic driver property,
-; so leaving this section empty.
+; so leaving this section effectively empty.
+AddReg      = OSVR_HDK_HID_RAW.AddReg
 
-[OSVR_HDK_HID_RAW.NT.Services]
+[OSVR_HDK_HID_RAW.AddReg]
+; Dummy section
+
+[OSVR_HDK_HID_RAW.Services]
 ; Just delegate to the standard driver
 Include=input.inf
 Needs=HID_Raw_Inst.NT.Services
