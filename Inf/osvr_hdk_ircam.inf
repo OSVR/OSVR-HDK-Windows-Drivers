@@ -27,7 +27,7 @@ Provider    = %Manufacturer%
 CatalogFile = %filename%.cat
 
 ; using a high major version here for the same logic as in the HID inf.
-DriverVer=08/02/2016,10.1.2.8
+DriverVer=09/27/2016,10.1.2.8
 DriverPackageType=PlugAndPlay
 DriverPackageDisplayName = %PackageDisplayName%
 
@@ -40,8 +40,8 @@ ExcludeFromSelect=* ; Only auto-matching-install is fine, just a "naming" driver
 ;;;;;;;;;;;;;;;;;;;
 ; "Models" sections
 
-; all architectures
-[OSVRMfg]
+; arch decoration on this section to appease infverif warning
+[OSVRMfg.NTx86]
 %OSVR_IR_CAM%=OSVR_IR_CAM_PRE10,USB\VID_0BDA&PID_57E8&MI_00
 
 [OSVRMfg.NTia64]
