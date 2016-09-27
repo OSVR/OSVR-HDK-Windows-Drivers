@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DeviceInfo xmlns="http://schemas.microsoft.com/windows/DeviceMetadata/DeviceInfo/2007/11/">
+  <DeviceCategoryList>
+    <DeviceCategory>Audio.Headphone</DeviceCategory>
+    <DeviceCategory>Audio.Adapter</DeviceCategory>
+    <DeviceCategory>Audio.Microphone</DeviceCategory>
+  </DeviceCategoryList>
+  <ModelName>OSVR HDK 2 Belt Box/Audio</ModelName>
+  <DeviceDescription1>Headset jack on HDK belt box.</DeviceDescription1>
+  <DeviceDescription2>Belt box also includes accessible USB3 port.</DeviceDescription2>
+  <ModelNumber>OSVR HDK 2 Belt Box</ModelNumber>
+  <Manufacturer>Razer (Asia-Pacific) Pte Ltd.</Manufacturer>
+  <DeviceIconFile>HDK-Beltbox.ico</DeviceIconFile>
+</DeviceInfo>
