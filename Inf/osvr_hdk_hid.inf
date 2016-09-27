@@ -36,7 +36,7 @@ CatalogFile = %filename%.cat
 ; Per https://msdn.microsoft.com/en-us/library/windows/hardware/jj131716(v=vs.85).aspx,
 ; version must exceed that of input.inf
 ; which was 6.3.9600.17041 in Win8.1
-DriverVer=08/02/2016,10.1.2.8
+DriverVer=09/27/2016,10.1.2.8
 DriverPackageType=PlugAndPlay
 DriverPackageDisplayName = %PackageDisplayName%
 
@@ -49,8 +49,8 @@ ExcludeFromSelect=* ; Only auto-matching-install is fine, just a "naming" driver
 ;;;;;;;;;;;;;;;;;;;
 ; "Models" sections
 
-; all architectures
-[OSVRMfg]
+; arch decoration on this section to appease infverif warning
+[OSVRMfg.NTx86]
 %OSVR_HDK_HID_USB%=OSVR_HDK_HID_USB,USB\VID_1532&PID_0B00&REV_0100&MI_02
 %OSVR_HDK_HID_RAW%=OSVR_HDK_HID_RAW,HID\VID_1532&PID_0B00&REV_0100&MI_02
 
