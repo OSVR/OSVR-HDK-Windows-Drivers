@@ -6,7 +6,7 @@
   <ModelName>OSVR HDK (Display)</ModelName>
   <DeviceDescription1>Hacker Development Kit head-mounted display</DeviceDescription1>
   <DeviceDescription2>Internal display panel</DeviceDescription2>
-  <ModelNumber>OSVR HDK v1.x</ModelNumber>
+  <ModelNumber>OSVR HDK family</ModelNumber>
   <Manufacturer>Razer and Sensics, Inc.</Manufacturer>
   <DeviceIconFile>HDK-display.ico</DeviceIconFile>
 </DeviceInfo>

@@ -7,7 +7,7 @@
   <ModelName>OSVR HDK</ModelName>
   <DeviceDescription1>Hacker Development Kit head-mounted display </DeviceDescription1>
   <DeviceDescription2>IMU tracker and control interface.</DeviceDescription2>
-  <ModelNumber>OSVR HDK v1.x</ModelNumber>
+  <ModelNumber>OSVR HDK family</ModelNumber>
   <Manufacturer>Razer and Sensics, Inc.</Manufacturer>
   <DeviceIconFile>HDK.ico</DeviceIconFile>
 </DeviceInfo>
