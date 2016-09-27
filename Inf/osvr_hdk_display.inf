@@ -33,7 +33,7 @@ CatalogFile = %filename%.cat
 ;CatalogFile.NTamd64 = %filename%_amd64.cat
 ;CatalogFile.NTarm = %filename%_arm.cat
 
-DriverVer=08/02/2016,1.1.2.8
+DriverVer=09/27/2016,1.1.2.8
 DriverPackageType=PlugAndPlay
 DriverPackageDisplayName = %PackageDisplayName%
 
@@ -46,8 +46,8 @@ ExcludeFromSelect=* ; Only auto-matching-install is fine, just a "naming" driver
 ;;;;;;;;;;;;;;;;;;;
 ; "Models" sections
 
-; all architectures
-[OSVRMfg]
+; arch decoration on this section to appease infverif warning
+[OSVRMfg.NTx86]
 %OSVR.SEN.1019.Desc%=OSVR_HDK1X_DISPLAY, MONITOR\SEN1019
 %OSVR.SVR.1019.Desc%=OSVR_HDK1X_DISPLAY, MONITOR\SVR1019
 
