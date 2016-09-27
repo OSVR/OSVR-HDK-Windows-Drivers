@@ -41,6 +41,7 @@ Section -DeviceMetadata
     File "${REPO_ROOT}\Metadata\Output\HMDOnly\*.devicemetadata-ms"
     File "${REPO_ROOT}\Metadata\Output\BeltBox12\*.devicemetadata-ms"
     File "${REPO_ROOT}\Metadata\Output\BeltBox13\*.devicemetadata-ms"
+    File "${REPO_ROOT}\Metadata\Output\BeltBox2\*.devicemetadata-ms"
     File "${REPO_ROOT}\Metadata\Output\TrackingCamera\*.devicemetadata-ms"
     File "${REPO_ROOT}\Metadata\Output\TrackingCameraNeedsUpgrade\*.devicemetadata-ms"
 
