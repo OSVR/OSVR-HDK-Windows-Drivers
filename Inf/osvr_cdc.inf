@@ -46,8 +46,10 @@ DefaultDestDir=12
 ;;;;;;;;;;;;;;;;;;;
 ; "Models" sections
 
-; This driver not needed on Windows 10 - in-box CDC driver/inf (usbser.inf) should work fine,
-; but wrapping it for naming purposes.
+; This driver not strictly needed on Windows 10 - in-box CDC class driver/inf
+; (usbser.inf) works fine, but wrapping it for naming purposes.
+; See comments for OSVR_HMD_CDC_10 as to why these sections are effectively
+; identical to the pre-10 sections.
 ; [OSVRMfg.NTx86.10]
 ; %OSVR_HMD_CDC%=OSVR_HMD_CDC_10, USB\VID_1532&PID_0B00&REV_0100&MI_00
 
@@ -74,32 +76,41 @@ DefaultDestDir=12
 %OSVR_HMD_CDC%=OSVR_HMD_CDC, USB\VID_1532&PID_0B00&REV_0100&MI_00
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; OSVR_HMD_CDC
 ; "DDInstall" and related sections for CDC control port
 ;
 ; As recommended at https://support.microsoft.com/en-us/kb/837637
 ; and https://msdn.microsoft.com/en-us/library/ff542605(v=vs.85).aspx
 ;
-; Some additions required.
+; Some additions were required.
 [OSVR_HMD_CDC.NT]
 Include=mdmcpq.inf,msports.inf
-;Needs=SerialEnumerator.NT ; serenum - appears to not be needed
+; Needs=SerialEnumerator.NT ; serenum - which we don't want in this case,
+; since there's no recognizable serial device we'd want Windows to try to
+; enumerate on this serial port. (There's no serial mouse here, please!)
 CopyFiles=FakeModemCopyFileSection
 AddReg=ComPort.NT.AddReg ; for MsPorts.dll,SerialPortPropPageProvider
 
 [OSVR_HMD_CDC.NT.Services]
 Include=mdmcpq.inf
 AddService=usbser, %ServiceFlags%, LowerFilter_Service_Inst
-;Needs=SerialEnumerator.NT.Services ; serenum, add msports.inf to include
+; Needs=SerialEnumerator.NT.Services ; for serenum, also needs msports.inf in Include
 
 [OSVR_HMD_CDC.NT.HW]
 Include=mdmcpq.inf
-;Needs=ComPort.NT.HW ; serenum, add msports.inf to include
+; Needs=ComPort.NT.HW ; for serenum, also needs msports.inf in Include
 AddReg=LowerFilterAddReg
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; "DDInstall" and related sections for CDC control port
-; on Windows 10 re-using the usbser.inf provided driver,
+;
+; For Windows 10 re-using the usbser.inf provided driver,
 ; as advised in the comments of the Windows 10 mdmcpq.inf
+;
+; TODO: Actually using these did not appear to work (Device Manager errors)
+; in earlier testing, hence they are commented out, and the
+; "legacy"/"compatibility" way (as so deemed by Windows 10 mdmcpq.inf)
+; is used instead.
 ;[OSVR_HMD_CDC_10]
 ;Include=usbser.inf
 ;Needs=UsbSerial_Install
