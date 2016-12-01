@@ -40,11 +40,20 @@ DriverVer=12/01/2016,10.1.2.8
 DriverPackageType=PlugAndPlay
 DriverPackageDisplayName = %PackageDisplayName%
 
+[SourceDisksNames]
+; present for validation purposes only
+
+[SourceDisksFiles]
+; present for validation purposes only
+
+[DestinationDirs]
+; present for validation purposes only
+
 [ControlFlags]
 ExcludeFromSelect=* ; Only auto-matching-install is fine, just a "naming" driver.
 
 [Manufacturer]
-%Manufacturer% = OSVRMfg, NTamd64, NTia64, NTarm
+%Manufacturer% = OSVRMfg, NTx86, NTamd64, NTia64, NTarm
 
 ;;;;;;;;;;;;;;;;;;;
 ; "Models" sections
@@ -69,18 +78,18 @@ ExcludeFromSelect=* ; Only auto-matching-install is fine, just a "naming" driver
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; "DDInstall" and related sections for:
 ; USB\VID_vvvv&PID_dddd&REV_rrrr&MI_ii parent device to the HID\ device
-[OSVR_HDK_HID_USB]
+[OSVR_HDK_HID_USB.NT]
 ; Just delegate to the standard driver
 ; Not using "Needs" here to avoid the generic driver property.
 Include=input.inf
 Copyfiles=HID_Inst.CopyFiles.NT
 
-[OSVR_HDK_HID_USB.HW]
+[OSVR_HDK_HID_USB.NT.HW]
 ; Just delegate to the standard driver
 Include=input.inf
 Needs=HID_Inst.NT.HW
 
-[OSVR_HDK_HID_USB.Services]
+[OSVR_HDK_HID_USB.NT.Services]
 ; Just delegate to the standard driver
 Include=input.inf
 Needs=HID_Inst.NT.Services
@@ -88,16 +97,16 @@ Needs=HID_Inst.NT.Services
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; "DDInstall" and related sections for:
 ; HID\VID_vvvv&PID_dddd&REV_rrrr&MI_ii child device
-[OSVR_HDK_HID_RAW]
+[OSVR_HDK_HID_RAW.NT]
 ; We'd just delegate to the standard driver, but
 ; not using "Needs" here to avoid the generic driver property,
 ; so leaving this section effectively empty.
-AddReg      = OSVR_HDK_HID_RAW.AddReg
+AddReg      = OSVR_HDK_HID_RAW.NT.AddReg
 
-[OSVR_HDK_HID_RAW.AddReg]
+[OSVR_HDK_HID_RAW.NT.AddReg]
 ; Dummy section
 
-[OSVR_HDK_HID_RAW.Services]
+[OSVR_HDK_HID_RAW.NT.Services]
 ; Just delegate to the standard driver
 Include=input.inf
 Needs=HID_Raw_Inst.NT.Services
