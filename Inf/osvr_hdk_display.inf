@@ -41,7 +41,7 @@ DriverPackageDisplayName = %PackageDisplayName%
 ExcludeFromSelect=* ; Only auto-matching-install is fine, just a "naming" driver.
 
 [Manufacturer]
-%Manufacturer% = OSVRMfg, NTamd64, NTia64, NTarm
+%Manufacturer% = OSVRMfg, NTx86, NTamd64, NTia64, NTarm
 
 ;;;;;;;;;;;;;;;;;;;
 ; "Models" sections
