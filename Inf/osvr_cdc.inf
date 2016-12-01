@@ -37,11 +37,17 @@ DriverVer=12/01/2016,10.1.2.8
 DriverPackageType=PlugAndPlay
 DriverPackageDisplayName = %PackageDisplayName%
 
-[Manufacturer]
-%Manufacturer% = OSVRMfg, NTx86, NTamd64, NTia64, NTarm, NTx86.10, NTamd64.10, NTia64.10, NTarm.10
+[SourceDisksNames]
+; present for validation purposes only
+
+[SourceDisksFiles]
+; present for validation purposes only
 
 [DestinationDirs]
-DefaultDestDir=12
+; present for validation purposes only
+
+[Manufacturer]
+%Manufacturer% = OSVRMfg, NTx86, NTamd64, NTia64, NTarm, NTx86.10, NTamd64.10, NTia64.10, NTarm.10
 
 ;;;;;;;;;;;;;;;;;;;
 ; "Models" sections
@@ -50,30 +56,34 @@ DefaultDestDir=12
 ; (usbser.inf) works fine, but wrapping it for naming purposes.
 ; See comments for OSVR_HMD_CDC_10 as to why these sections are effectively
 ; identical to the pre-10 sections.
-; [OSVRMfg.NTx86.10]
-; %OSVR_HMD_CDC%=OSVR_HMD_CDC_10, USB\VID_1532&PID_0B00&REV_0100&MI_00
+[OSVRMfg.NTx86.10]
+%OSVR_HMD_CDC%=OSVR_HMD_CDC, USB\VID_1532&PID_0B00&MI_00
+; %OSVR_HMD_CDC%=OSVR_HMD_CDC_10, USB\VID_1532&PID_0B00&MI_00
 
-; [OSVRMfg.NTia64.10]
-; %OSVR_HMD_CDC%=OSVR_HMD_CDC_10, USB\VID_1532&PID_0B00&REV_0100&MI_00
+[OSVRMfg.NTia64.10]
+%OSVR_HMD_CDC%=OSVR_HMD_CDC, USB\VID_1532&PID_0B00&MI_00
+; %OSVR_HMD_CDC%=OSVR_HMD_CDC_10, USB\VID_1532&PID_0B00&MI_00
 
-; [OSVRMfg.NTamd64.10]
-; %OSVR_HMD_CDC%=OSVR_HMD_CDC_10, USB\VID_1532&PID_0B00&REV_0100&MI_00
+[OSVRMfg.NTamd64.10]
+%OSVR_HMD_CDC%=OSVR_HMD_CDC, USB\VID_1532&PID_0B00&MI_00
+; %OSVR_HMD_CDC%=OSVR_HMD_CDC_10, USB\VID_1532&PID_0B00&MI_00
 
-; [OSVRMfg.NTarm.10]
-; %OSVR_HMD_CDC%=OSVR_HMD_CDC_10, USB\VID_1532&PID_0B00&REV_0100&MI_00
+[OSVRMfg.NTarm.10]
+%OSVR_HMD_CDC%=OSVR_HMD_CDC, USB\VID_1532&PID_0B00&MI_00
+; %OSVR_HMD_CDC%=OSVR_HMD_CDC_10, USB\VID_1532&PID_0B00&MI_00
 
 ; Windows 8.1 and below, all architectures
 [OSVRMfg.NTx86]
-%OSVR_HMD_CDC%=OSVR_HMD_CDC, USB\VID_1532&PID_0B00&REV_0100&MI_00
+%OSVR_HMD_CDC%=OSVR_HMD_CDC, USB\VID_1532&PID_0B00&MI_00
 
 [OSVRMfg.NTia64]
-%OSVR_HMD_CDC%=OSVR_HMD_CDC, USB\VID_1532&PID_0B00&REV_0100&MI_00
+%OSVR_HMD_CDC%=OSVR_HMD_CDC, USB\VID_1532&PID_0B00&MI_00
 
 [OSVRMfg.NTamd64]
-%OSVR_HMD_CDC%=OSVR_HMD_CDC, USB\VID_1532&PID_0B00&REV_0100&MI_00
+%OSVR_HMD_CDC%=OSVR_HMD_CDC, USB\VID_1532&PID_0B00&MI_00
 
 [OSVRMfg.NTarm]
-%OSVR_HMD_CDC%=OSVR_HMD_CDC, USB\VID_1532&PID_0B00&REV_0100&MI_00
+%OSVR_HMD_CDC%=OSVR_HMD_CDC, USB\VID_1532&PID_0B00&MI_00
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; OSVR_HMD_CDC
@@ -102,6 +112,7 @@ Include=mdmcpq.inf
 AddReg=LowerFilterAddReg
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; OSVR_HMD_CDC_10
 ; "DDInstall" and related sections for CDC control port
 ;
 ; For Windows 10 re-using the usbser.inf provided driver,
@@ -111,17 +122,22 @@ AddReg=LowerFilterAddReg
 ; in earlier testing, hence they are commented out, and the
 ; "legacy"/"compatibility" way (as so deemed by Windows 10 mdmcpq.inf)
 ; is used instead.
-;[OSVR_HMD_CDC_10]
-;Include=usbser.inf
-;Needs=UsbSerial_Install
 
-;[OSVR_HMD_CDC_10.Services]
-;Include=usbser.inf
-;Needs=UsbSerial_Install.Services
-
-;[OSVR_HMD_CDC_10.HW]
-;Include=usbser.inf
-;Needs=UsbSerial_Install.Hw
+; [OSVR_HMD_CDC_10.NT]
+; Include=usbser.inf
+; Needs=UsbSerial_Install
+; AddReg=OSVR_HMD_CDC_10.NT.AddReg
+;
+; [OSVR_HMD_CDC_10.NT.Services]
+; Include=usbser.inf
+; Needs=UsbSerial_Install.Services
+;
+; [OSVR_HMD_CDC_10.NT.HW]
+; Include=usbser.inf
+; Needs=UsbSerial_Install.Hw
+;
+; [OSVR_HMD_CDC_10.NT.AddReg]
+; present for validation purposes only
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Strings (and constants)
