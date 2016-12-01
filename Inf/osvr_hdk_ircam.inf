@@ -31,11 +31,20 @@ DriverVer=12/01/2016,10.1.2.8
 DriverPackageType=PlugAndPlay
 DriverPackageDisplayName = %PackageDisplayName%
 
+[SourceDisksNames]
+; present for validation purposes only
+
+[SourceDisksFiles]
+; present for validation purposes only
+
+[DestinationDirs]
+; present for validation purposes only
+
 [ControlFlags]
 ExcludeFromSelect=* ; Only auto-matching-install is fine, just a "naming" driver.
 
 [Manufacturer]
-%Manufacturer% = OSVRMfg, NTamd64, NTia64, NTarm, 10, NTamd64.10, NTarm.10
+%Manufacturer% = OSVRMfg, NTx86, NTamd64, NTia64, NTarm, NTx86.10, NTamd64.10, NTarm.10
 
 ;;;;;;;;;;;;;;;;;;;
 ; "Models" sections
@@ -53,8 +62,9 @@ ExcludeFromSelect=* ; Only auto-matching-install is fine, just a "naming" driver
 [OSVRMfg.NTarm]
 %OSVR_IR_CAM%=OSVR_IR_CAM_PRE10,USB\VID_0BDA&PID_57E8&MI_00
 
-; all architectures, WIndows 10
-[OSVRMfg.10]
+; all architectures, Windows 10
+; arch decoration on this section to appease infverif warning
+[OSVRMfg.NTx86.10]
 %OSVR_IR_CAM%=OSVR_IR_CAM_10,USB\VID_0BDA&PID_57E8&MI_00
 
 [OSVRMfg.NTamd64.10]
@@ -69,7 +79,7 @@ ExcludeFromSelect=* ; Only auto-matching-install is fine, just a "naming" driver
 ; we must repeat more of this section from usbvideo.inf
 ; than I'd prefer.
 
-[OSVR_IR_CAM_PRE10]
+[OSVR_IR_CAM_PRE10.NT]
 ; Just delegate as the standard driver does
 Include=usbvideo.inf, ks.inf, kscaptur.inf
 Needs=KS.Registration, KSCAPTUR.Registration.NT
@@ -77,7 +87,7 @@ CopyFiles=USBVideo.CopyList
 AddReg=USBVideo.AddReg, TopologyNodeRegistration, DVCR.Plugins
 ; Skipping AddProperty since that just says "Generic Driver Installed"
 
-[OSVR_IR_CAM_10]
+[OSVR_IR_CAM_10.NT]
 ; Just delegate as the standard driver does
 Include=usbvideo.inf, ks.inf, kscaptur.inf
 Needs=KS.Registration, KSCAPTUR.Registration.NT
@@ -89,37 +99,37 @@ AddReg=USBVideo.AddReg, TopologyNodeRegistration, DVCR.Plugins
 ; so we actually do want our own supplied name to override it.
 PreferDeviceInfo=0
 
-[OSVR_IR_CAM_PRE10.HW]
+[OSVR_IR_CAM_PRE10.NT.HW]
 ; Just delegate as the standard driver does
 Include=machine.inf
 Needs=PciD3ColdSupported
 
-[OSVR_IR_CAM_10.HW]
+[OSVR_IR_CAM_10.NT.HW]
 ; Just delegate as the standard driver does on Windows 10
 Include=pci.inf
 Needs=PciD3ColdSupported.HW
 
-[OSVR_IR_CAM_PRE10.CoInstallers]
+[OSVR_IR_CAM_PRE10.NT.CoInstallers]
 Include=usbvideo.inf
 Needs=USBVideo.NT.CoInstallers
 
-[OSVR_IR_CAM_10.CoInstallers]
+[OSVR_IR_CAM_10.NT.CoInstallers]
 Include=usbvideo.inf
 Needs=USBVideo.NT.CoInstallers
 
-[OSVR_IR_CAM_PRE10.Interfaces]
+[OSVR_IR_CAM_PRE10.NT.Interfaces]
 Include=usbvideo.inf
 Needs=USBVideo.NT.Interfaces
 
-[OSVR_IR_CAM_10.Interfaces]
+[OSVR_IR_CAM_10.NT.Interfaces]
 Include=usbvideo.inf
 Needs=USBVideo.NT.Interfaces
 
-[OSVR_IR_CAM_PRE10.Services]
+[OSVR_IR_CAM_PRE10.NT.Services]
 Include=usbvideo.inf
 Needs=USBVideo.NT.Services
 
-[OSVR_IR_CAM_10.Services]
+[OSVR_IR_CAM_10.NT.Services]
 Include=usbvideo.inf
 Needs=USBVideo.NT.Services
 
