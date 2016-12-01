@@ -48,17 +48,17 @@ DefaultDestDir=12
 
 ; This driver not needed on Windows 10 - in-box CDC driver/inf (usbser.inf) should work fine,
 ; but wrapping it for naming purposes.
-[OSVRMfg.NTx86.10]
-%OSVR_HMD_CDC%=OSVR_HMD_CDC_10, USB\VID_1532&PID_0B00&REV_0100&MI_00
+; [OSVRMfg.NTx86.10]
+; %OSVR_HMD_CDC%=OSVR_HMD_CDC_10, USB\VID_1532&PID_0B00&REV_0100&MI_00
 
-[OSVRMfg.NTia64.10]
-%OSVR_HMD_CDC%=OSVR_HMD_CDC_10, USB\VID_1532&PID_0B00&REV_0100&MI_00
+; [OSVRMfg.NTia64.10]
+; %OSVR_HMD_CDC%=OSVR_HMD_CDC_10, USB\VID_1532&PID_0B00&REV_0100&MI_00
 
-[OSVRMfg.NTamd64.10]
-%OSVR_HMD_CDC%=OSVR_HMD_CDC_10, USB\VID_1532&PID_0B00&REV_0100&MI_00
+; [OSVRMfg.NTamd64.10]
+; %OSVR_HMD_CDC%=OSVR_HMD_CDC_10, USB\VID_1532&PID_0B00&REV_0100&MI_00
 
-[OSVRMfg.NTarm.10]
-%OSVR_HMD_CDC%=OSVR_HMD_CDC_10, USB\VID_1532&PID_0B00&REV_0100&MI_00
+; [OSVRMfg.NTarm.10]
+; %OSVR_HMD_CDC%=OSVR_HMD_CDC_10, USB\VID_1532&PID_0B00&REV_0100&MI_00
 
 ; Windows 8.1 and below, all architectures
 [OSVRMfg.NTx86]
@@ -100,17 +100,17 @@ AddReg=LowerFilterAddReg
 ; "DDInstall" and related sections for CDC control port
 ; on Windows 10 re-using the usbser.inf provided driver,
 ; as advised in the comments of the Windows 10 mdmcpq.inf
-[OSVR_HMD_CDC_10.NT]
-Include=usbser.inf
-Needs=UsbSerial_Install
+;[OSVR_HMD_CDC_10]
+;Include=usbser.inf
+;Needs=UsbSerial_Install
 
-[OSVR_HMD_CDC_10.NT.Services]
-Include=usbser.inf
-Needs=UsbSerial_Install.Services
+;[OSVR_HMD_CDC_10.Services]
+;Include=usbser.inf
+;Needs=UsbSerial_Install.Services
 
-[OSVR_HMD_CDC_10.NT.HW]
-Include=usbser.inf
-Needs=UsbSerial_Install.Hw
+;[OSVR_HMD_CDC_10.HW]
+;Include=usbser.inf
+;Needs=UsbSerial_Install.Hw
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Strings (and constants)
