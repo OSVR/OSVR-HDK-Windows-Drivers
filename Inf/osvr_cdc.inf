@@ -33,7 +33,7 @@ CatalogFile = %filename%.cat
 ;CatalogFile.NTamd64 = %filename%_amd64.cat
 ;CatalogFile.NTarm = %filename%_arm.cat
 
-DriverVer=09/27/2016,10.1.2.8
+DriverVer=12/01/2016,10.1.2.8
 DriverPackageType=PlugAndPlay
 DriverPackageDisplayName = %PackageDisplayName%
 
